@@ -9,7 +9,6 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -115,72 +114,30 @@
 <header class="bg-white dark:bg-slate-900 font-manrope antialiased w-full top-0 border-b border-slate-200 dark:border-slate-800 shadow-sm z-50 sticky">
 <div class="flex justify-between items-center w-full px-8 py-4 max-w-[1440px] mx-auto">
 <div class="flex items-center gap-8">
-<div class="text-2xl font-black text-blue-700 dark:text-blue-400 tracking-tight">PharmSense</div>
-<div class="hidden md:flex items-center bg-surface-container rounded-full px-4 py-2 border border-outline-variant focus-within:border-primary-container transition-colors w-96">
-<span class="material-symbols-outlined text-outline mr-2">search</span>
-<input class="bg-transparent border-none focus:ring-0 text-body-md text-on-surface w-full placeholder-outline" placeholder="Search medications, health products..." type="text"/>
-</div>
+<div class="text-2xl font-black tracking-tight" style="color: #0055A5;">PharmSense</div>
 </div>
 <nav class="hidden md:flex items-center gap-8">
-<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-300 transition-colors" href="#">Prescriptions</a>
-<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-300 transition-colors" href="#">Refills</a>
-<a class="text-blue-700 dark:text-blue-400 font-bold border-b-2 border-blue-700 pb-1 opacity-80 scale-95 transition-all" href="#">Health Hub</a>
-<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-300 transition-colors" href="#">Consultation</a>
+<a class="font-bold border-b-2 pb-1 transition-all" href="#" style="color: #0055A5; border-color: #0055A5;">INVENTORY</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-300 transition-colors" href="#">PHARMACY FINDER</a>
 </nav>
 <div class="flex items-center gap-4 text-blue-700 dark:text-blue-400">
-<button class="hover:text-blue-600 dark:hover:text-blue-300 transition-colors p-2 rounded-full hover:bg-surface-container"><span class="material-symbols-outlined">shopping_cart</span></button>
 <button class="hover:text-blue-600 dark:hover:text-blue-300 transition-colors p-2 rounded-full hover:bg-surface-container"><span class="material-symbols-outlined">notifications</span></button>
 <button class="hover:text-blue-600 dark:hover:text-blue-300 transition-colors p-2 rounded-full hover:bg-surface-container"><span class="material-symbols-outlined">account_circle</span></button>
 </div>
 </div>
 </header>
 <div class="flex flex-1 max-w-[1440px] mx-auto w-full relative">
-<!-- SideNavBar -->
-<aside class="bg-slate-50 dark:bg-slate-950 font-manrope text-sm font-medium h-[calc(100vh-80px)] w-72 border-r border-slate-200 dark:border-slate-800 sticky top-[80px] hidden lg:flex flex-col">
-<div class="p-6 pb-2 border-b border-slate-200 dark:border-slate-800">
-<h2 class="font-h3 text-on-surface">Catalog</h2>
-<p class="text-body-sm text-on-surface-variant mt-1">Browse by Category</p>
-</div>
-<nav class="flex flex-col gap-2 p-6 flex-1 overflow-y-auto">
-<a class="bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg font-bold flex items-center gap-3 p-3 scale-98" href="#">
-<span class="material-symbols-outlined" data-weight="fill">medication</span>
-                    Pain Relief
-                </a>
-<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg flex items-center gap-3 p-3 hover:translate-x-1 transition-transform duration-200" href="#">
-<span class="material-symbols-outlined">pill</span>
-                    Vitamins
-                </a>
-<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg flex items-center gap-3 p-3 hover:translate-x-1 transition-transform duration-200" href="#">
-<span class="material-symbols-outlined">medical_services</span>
-                    First Aid
-                </a>
-<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg flex items-center gap-3 p-3 hover:translate-x-1 transition-transform duration-200" href="#">
-<span class="material-symbols-outlined">thermostat</span>
-                    Cold &amp; Flu
-                </a>
-<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg flex items-center gap-3 p-3 hover:translate-x-1 transition-transform duration-200" href="#">
-<span class="material-symbols-outlined">vital_signs</span>
-                    Chronic Care
-                </a>
-</nav>
-<div class="p-6 border-t border-slate-200 dark:border-slate-800">
-<button class="w-full bg-primary-container text-on-primary font-button py-3 px-4 rounded-xl hover:bg-primary transition-colors flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(0,85,165,0.2)]">
-<span class="material-symbols-outlined">upload_file</span>
-                    Upload Prescription
-                </button>
-</div>
-</aside>
 <!-- Main Content -->
 <main class="flex-1 p-6 lg:p-12 min-w-0">
 <!-- Content Header -->
 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
 <div>
-<h1 class="font-h2 text-on-surface">Pain Relief</h1>
-<p class="text-body-md text-on-surface-variant mt-2">Showing 24 products in Pain Relief</p>
+<h1 class="font-display text-[32px] font-bold text-on-surface tracking-tight" style="font-family: 'Manrope', sans-serif;">PharmSense Inventory</h1>
+<div class="h-1 w-12 bg-primary mt-2 rounded-full" style="background-color: #0055A5;"></div>
 </div>
 <div class="flex items-center gap-4">
 <div class="flex items-center bg-surface-container rounded-lg p-1 border border-outline-variant">
-<button class="p-2 bg-white rounded shadow-sm text-primary-container"><span class="material-symbols-outlined" data-weight="fill">grid_view</span></button>
+<button class="p-2 bg-white rounded shadow-sm" style="color: #0055A5;"><span class="material-symbols-outlined" data-weight="fill">grid_view</span></button>
 <button class="p-2 text-outline hover:text-on-surface"><span class="material-symbols-outlined">view_list</span></button>
 </div>
 <div class="relative">
@@ -198,24 +155,14 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
 <!-- Product Card 1 -->
 <article class="bg-white rounded-[24px] border border-slate-200 p-6 flex flex-col shadow-[0_8px_24px_rgba(0,85,165,0.04)] hover:shadow-[0_12px_32px_rgba(0,85,165,0.08)] transition-shadow duration-300 relative group">
-<div class="absolute top-6 left-6 z-10">
-<span class="bg-secondary/10 text-secondary font-label-bold px-3 py-1.5 rounded-full uppercase">Over the Counter</span>
-</div>
 <div class="w-full aspect-square rounded-[16px] bg-surface-container-low mb-6 overflow-hidden flex items-center justify-center p-8 relative">
 <img alt="Ibuprofen 400mg bottle" class="w-full h-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" data-alt="clean studio shot of ibuprofen bottle on white background soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2CLzostZK8wEuqOFQIHZnxBeT-ZONtrk6QdhnaWYunoEdHi-qpXmp7dck04QxAI1flgcZ2Ss_AVSX2iDj0UcZm3yZND5pc7ppf_68OfUtKFU5GHkYdB57waZdNJaR-XxIxdxLT4a7euiKsospgLuTLPHGuJAOfNqohstdXtFqmnpj7XZP2-R_xAcgaCzETUv89l0fZL7EnlToztarxhzjudA7tUMfH_SPMjnHSDpHwzEPH8hRoD_tWP3Jg-TH6DHqyaknMoFYn84"/>
 </div>
 <div class="flex-1 flex flex-col">
 <div class="flex justify-between items-start mb-2">
 <h3 class="font-h3 text-on-surface">Ibuprofen</h3>
-<span class="font-h3 text-primary-container">$8.99</span>
 </div>
-<p class="text-body-md text-on-surface-variant mb-4">400mg • 50 Tablets</p>
-<div class="mt-auto">
-<button class="w-full bg-secondary text-on-secondary font-button py-3 px-4 rounded-[24px] hover:bg-secondary-container hover:text-on-secondary-container transition-colors shadow-[0_4px_12px_rgba(0,106,106,0.15)] hover:shadow-[0_6px_16px_rgba(0,106,106,0.25)] flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
-                                Add to Cart
-                            </button>
-</div>
+<p class="text-body-md text-on-surface-variant">400mg • 50 Tablets</p>
 </div>
 </article>
 <!-- Product Card 2 -->
@@ -229,37 +176,20 @@
 <div class="flex-1 flex flex-col">
 <div class="flex justify-between items-start mb-2">
 <h3 class="font-h3 text-on-surface">Acetaminophen</h3>
-<span class="font-h3 text-primary-container">$12.50</span>
 </div>
-<p class="text-body-md text-on-surface-variant mb-4">Extra Strength 500mg • 100 Caplets</p>
-<div class="mt-auto">
-<button class="w-full bg-primary-container text-on-primary font-button py-3 px-4 rounded-[24px] hover:bg-primary transition-colors shadow-[0_4px_12px_rgba(0,85,165,0.15)] hover:shadow-[0_6px_16px_rgba(0,85,165,0.25)] flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-[20px]">upload_file</span>
-                                Upload Rx to Add
-                            </button>
-</div>
+<p class="text-body-md text-on-surface-variant">Extra Strength 500mg • 100 Caplets</p>
 </div>
 </article>
 <!-- Product Card 3 -->
 <article class="bg-white rounded-[24px] border border-slate-200 p-6 flex flex-col shadow-[0_8px_24px_rgba(0,85,165,0.04)] hover:shadow-[0_12px_32px_rgba(0,85,165,0.08)] transition-shadow duration-300 relative group">
-<div class="absolute top-6 left-6 z-10">
-<span class="bg-secondary/10 text-secondary font-label-bold px-3 py-1.5 rounded-full uppercase">Over the Counter</span>
-</div>
 <div class="w-full aspect-square rounded-[16px] bg-surface-container-low mb-6 overflow-hidden flex items-center justify-center p-8 relative">
 <img alt="Aspirin bottle" class="w-full h-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" data-alt="minimalist studio photography of aspirin bottle soft shadows white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC23sLwBALnJ35KGyb5QrAjESVe-8IcLW4HRLQBTAdPLGTgerByyc3w-hk9ALOLvG6SSoQh692tThK2ksoEO0CK7tPQD5OdMuvjEnN_7qdMuAq199VBzeEYzyLLOdn2m1KK_fSpp5HUjneLQduEpwiuld837_N6kVStitVsucMItn2A0gK4Iyh3w9avs242Yc2YSO2msmzX_5iIDVaLP1qGJl4w0uTOFHmwoUxxZ19o-hmr8dAQhqJaUiB16YTXcRORh3Mzkl5e1aM"/>
 </div>
 <div class="flex-1 flex flex-col">
 <div class="flex justify-between items-start mb-2">
 <h3 class="font-h3 text-on-surface">Aspirin</h3>
-<span class="font-h3 text-primary-container">$6.25</span>
 </div>
-<p class="text-body-md text-on-surface-variant mb-4">Low Dose 81mg • 120 Tablets</p>
-<div class="mt-auto">
-<button class="w-full bg-secondary text-on-secondary font-button py-3 px-4 rounded-[24px] hover:bg-secondary-container hover:text-on-secondary-container transition-colors shadow-[0_4px_12px_rgba(0,106,106,0.15)] hover:shadow-[0_6px_16px_rgba(0,106,106,0.25)] flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
-                                Add to Cart
-                            </button>
-</div>
+<p class="text-body-md text-on-surface-variant">Low Dose 81mg • 120 Tablets</p>
 </div>
 </article>
 <!-- Product Card 4 -->
@@ -273,15 +203,8 @@
 <div class="flex-1 flex flex-col">
 <div class="flex justify-between items-start mb-2">
 <h3 class="font-h3 text-on-surface">Naproxen</h3>
-<span class="font-h3 text-primary-container">$18.00</span>
 </div>
-<p class="text-body-md text-on-surface-variant mb-4">500mg • 60 Tablets</p>
-<div class="mt-auto">
-<button class="w-full bg-primary-container text-on-primary font-button py-3 px-4 rounded-[24px] hover:bg-primary transition-colors shadow-[0_4px_12px_rgba(0,85,165,0.15)] hover:shadow-[0_6px_16px_rgba(0,85,165,0.25)] flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-[20px]">upload_file</span>
-                                Upload Rx to Add
-                            </button>
-</div>
+<p class="text-body-md text-on-surface-variant">500mg • 60 Tablets</p>
 </div>
 </article>
 </div>
@@ -289,7 +212,7 @@
 <div class="mt-12 flex justify-center">
 <nav class="flex items-center gap-2">
 <button class="w-10 h-10 flex items-center justify-center rounded-full text-outline hover:bg-surface-container transition-colors disabled:opacity-50"><span class="material-symbols-outlined">chevron_left</span></button>
-<button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary-container text-on-primary font-label-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-primary font-label-bold" style="background-color: #0055A5;">1</button>
 <button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface hover:bg-surface-container font-label-bold transition-colors">2</button>
 <button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface hover:bg-surface-container font-label-bold transition-colors">3</button>
 <span class="text-on-surface-variant mx-1">...</span>
@@ -300,7 +223,7 @@
 </div>
 <!-- Footer -->
 <footer class="bg-white dark:bg-slate-900 font-manrope text-xs text-slate-500 full-width border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center px-8 py-12 w-full mt-auto">
-<div class="text-lg font-bold text-slate-400 mb-4 md:mb-0">PharmSense</div>
+<div class="text-lg font-bold mb-4 md:mb-0" style="color: #0055A5; opacity: 0.8;">PharmSense</div>
 <nav class="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
 <a class="text-slate-500 hover:text-blue-600 transition-colors" href="#">Privacy Policy</a>
 <a class="text-slate-500 hover:text-blue-600 transition-colors" href="#">Terms of Service</a>
@@ -308,7 +231,7 @@
 <a class="text-slate-500 hover:text-blue-600 transition-colors" href="#">Contact Support</a>
 </nav>
 <div class="text-center md:text-right">
-            © 2024 PharmSense Digital Pharmacy. All rights reserved. Licensed Healthcare Provider.
-        </div>
+        © 2024 PharmSense Digital Pharmacy. All rights reserved. Licensed Healthcare Provider.
+    </div>
 </footer>
 </body></html>
