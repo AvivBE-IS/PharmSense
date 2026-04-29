@@ -17,13 +17,11 @@ from app.config import settings
 
 
 def hash_password(plain_password: str) -> str:
-    """Return the bcrypt hash of the given plain-text password."""
     hashed = _bcrypt.hashpw(plain_password.encode("utf-8"), _bcrypt.gensalt())
     return hashed.decode("utf-8")
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """Return True if plain_password matches the stored hash."""
     return _bcrypt.checkpw(
         plain_password.encode("utf-8"),
         hashed_password.encode("utf-8"),
@@ -36,32 +34,25 @@ def create_access_token(
     subject: Any,
     expires_delta: Optional[timedelta] = None,
 ) -> str:
-    """
-    Create a signed JWT access token.
-
-    Args:
-        subject: The value to store in the ``sub`` claim (typically user id).
-        expires_delta: Custom expiry. Defaults to settings.ACCESS_TOKEN_EXPIRE_MINUTES.
-
-    Returns:
-        Encoded JWT string.
-    """
     expire = datetime.now(timezone.utc) + (
         expires_delta or timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     )
-    payload = {"sub": str(subject), "exp": expire}
+    payload = {"sub": str(subject), "exp": expire, "type": "access"}
     return jwt.encode(payload, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
 
 
-def decode_token(token: str) -> Optional[str]:
-    """
-    Decode and validate a JWT token.
+def create_refresh_token(subject: Any) -> str:
+    expire = datetime.now(timezone.utc) + timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
+    payload = {"sub": str(subject), "exp": expire, "type": "refresh"}
+    return jwt.encode(payload, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
 
-    Returns:
-        The ``sub`` claim value on success, or None if the token is invalid/expired.
-    """
+
+def decode_token(token: str, expected_type: str = "access") -> Optional[str]:
+    """Decode and validate a JWT. Returns the sub claim, or None if invalid."""
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+        if payload.get("type") != expected_type:
+            return None
         return payload.get("sub")
     except JWTError:
         return None
