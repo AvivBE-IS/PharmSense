@@ -38,12 +38,26 @@
     "ordersDesc": "נהל ועקוב אחר משלוחי התרופות החוזרים שלך.",
     "ordersCta": "מעקב",
     "trendingTitle": "נושאי בריאות פופולריים",
-    "trending0": "הכנה לעונת האלרגיות",
-    "trending1": "ניהול יתר לחץ דם",
-    "trending2": "תוספי ויטמין D",
-    "trending3": "אינטראקציות תרופתיות",
+    "trending0": "משהו לכאב גרון לילדים",
+    "trending1": "ויטמינים בטוחים להריון",
+    "trending2": "תחליף גנרי זול לאדוויל",
+    "trending3": "תרופה לאלרגיה שלא גורמת ישנוניות",
     "aiError": "לא הצלחתי לעבד את הבקשה.",
-    "networkError": "מצטערים, לא ניתן להגיע לעוזר ה-AI. אנא נסה שוב."
+    "networkError": "מצטארים, לא ניתן להגיע לעוזר ה-AI. אנא נסה שוב.",
+    "smartSummary": "סיכום חכם",
+    "searchFor": "חיפוש עבור:",
+    "targetLabel": "קהל יעד:",
+    "urgencyHigh": "עדיפות גבוהה",
+    "noResultsTitle": "לא נמצאו תרופות",
+    "noResultsDesc": "לא מצאנו תרופה התואמת לחיפוש שלך. נסה שם אחר, מותג או תסמינט."
+  },
+  "card": {
+    "inStock": "במלאי",
+    "outOfStock": "אזל מהמלאי",
+    "prescriptionRequired": "דרוש מרשם",
+    "pregnancySafe": "בטוח בהריון",
+    "price": "מחיר",
+    "viewDetails": "פרטים נוספים"
   },
   "footer": {
     "copyright": "© כל הזכויות שמורות ל-PharmSense Digital Healthcare 2026."

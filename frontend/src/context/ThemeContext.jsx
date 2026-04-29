@@ -4,7 +4,7 @@ const ThemeContext = createContext({ theme: "light", toggle: () => {} });
 
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(
-    () => localStorage.getItem("pharmsense-theme") || "light"
+    () => localStorage.getItem("pharmsense-theme") || "light",
   );
 
   useEffect(() => {

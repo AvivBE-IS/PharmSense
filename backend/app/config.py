@@ -34,15 +34,20 @@ class Settings(BaseSettings):
     def cors_origins_list(self) -> list[str]:
         return [o.strip() for o in self.CORS_ORIGINS.split(",") if o.strip()]
 
-    # ── LLM ──────────────────────────────────────────────────────────────────
+    # ── LLM (primary) ──────────────────────────────────────────────────────────
     LLM_PROVIDER: Literal["openai", "anthropic", "gemini"] = "openai"
     LLM_MODEL: str = "gpt-4o-mini"
     LLM_TEMPERATURE: float = Field(default=0.2, ge=0.0, le=2.0)
 
-    # API keys — only the key matching LLM_PROVIDER is required at runtime
+    # ── LLM (fallback) — used when the primary provider returns an API error ──
+    FALLBACK_LLM_PROVIDER: Literal["openai", "anthropic", "gemini", ""] = ""
+    FALLBACK_LLM_MODEL: str = ""
+
+    # API keys — only the key(s) matching active provider(s) are required
     OPENAI_API_KEY: str = ""
     ANTHROPIC_API_KEY: str = ""
     GEMINI_API_KEY: str = ""
+    groq_API_KEY: str = ""     # kept for OpenAI-compatible Groq access if needed
 
     model_config = SettingsConfigDict(
         env_file=".env",
