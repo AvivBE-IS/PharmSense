@@ -71,13 +71,17 @@ export default function DashboardPage() {
     setIsLoading(true);
     try {
       const data = await sendMessage(text);
+      const results = data.results ?? [];
+      const content =
+        results.length > 0
+          ? results.map((p) => `• ${p.name_en} ${p.dosage_strength} (${p.brand})`).join("\n")
+          : t("dashboard.aiError");
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content:
-            data.reply || data.answer || t("dashboard.aiError"),
-          sources: data.sources || [],
+          content,
+          sources: [],
         },
       ]);
     } catch {

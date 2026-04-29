@@ -23,6 +23,10 @@ def get_users_collection(db: AsyncIOMotorDatabase = Depends(get_db)) -> AsyncIOM
     return db[settings.MONGODB_USERS_COLLECTION]
 
 
+def get_products_collection(db: AsyncIOMotorDatabase = Depends(get_db)) -> AsyncIOMotorCollection:
+    return db[settings.MONGODB_PRODUCTS_COLLECTION]
+
+
 async def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(_bearer_scheme),
     users: AsyncIOMotorCollection = Depends(get_users_collection),
