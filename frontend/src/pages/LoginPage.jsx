@@ -7,7 +7,8 @@ import LanguageSwitcher from "../components/LanguageSwitcher";
 export default function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const dir = i18n.dir();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,10 +32,11 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="bg-background text-on-background min-h-screen flex flex-col antialiased">
+    /* Outer wrapper always LTR — prevents the split layout from flipping */
+    <div dir="ltr" className="bg-background text-on-background min-h-screen flex flex-col antialiased">
       <div className="flex-grow flex flex-col md:flex-row h-screen">
-        {/* Left panel — pharmacist image */}
-        <div className="hidden md:block md:w-1/2 relative bg-surface-container-high overflow-hidden rounded-r-[32px] ambient-shadow z-10">
+        {/* Left panel — pharmacist image, shrink-0 prevents reflow */}
+        <div className="hidden md:block md:w-1/2 shrink-0 relative bg-surface-container-high overflow-hidden rounded-r-[32px] ambient-shadow z-10">
           <img
             alt="Professional pharmacist smiling warmly in a bright, modern clinical environment"
             className="absolute inset-0 w-full h-full object-cover object-center opacity-90"
@@ -50,10 +52,10 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Right panel — login form */}
-        <div className="w-full md:w-1/2 flex items-center justify-center p-6 sm:p-12 bg-background relative z-0">
-          {/* Top-left logo */}
-          <div className="absolute top-8 left-8 flex items-center gap-2">
+        {/* Right panel — login form; dir scoped here so text/icons follow language */}
+        <div dir={dir} className="w-full md:w-1/2 flex items-center justify-center p-6 sm:p-12 bg-background relative z-0">
+          {/* Logo — always top-left regardless of language */}
+          <div dir="ltr" className="absolute top-8 start-8 flex items-center gap-2">
             <span
               className="material-symbols-outlined text-primary-container text-3xl"
               style={{ fontVariationSettings: '"FILL" 1' }}
@@ -64,7 +66,8 @@ export default function LoginPage() {
               PharmSense
             </span>
           </div>
-          <div className="absolute top-8 right-8">
+          {/* Switcher — always top-right regardless of language */}
+          <div dir="ltr" className="absolute top-8 end-8">
             <LanguageSwitcher />
           </div>
 
@@ -171,33 +174,7 @@ export default function LoginPage() {
               </div>
             </form>
 
-            {/* Divider + Bio-ID */}
-            <div className="mt-8">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-outline-variant" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-surface-container-lowest text-on-surface-variant font-body-sm text-body-sm">
-                    Or
-                  </span>
-                </div>
-              </div>
-              <div className="mt-6">
-                <button
-                  className="w-full h-[56px] bg-surface rounded-[24px] border border-outline-variant text-on-surface font-button text-button hover:bg-surface-dim transition-colors flex items-center justify-center gap-3"
-                  type="button"
-                >
-                  <span
-                    className="material-symbols-outlined text-primary-container"
-                    style={{ fontVariationSettings: '"FILL" 1' }}
-                  >
-                    fingerprint
-                  </span>
-                  <span>{t("login.bioId")}</span>
-                </button>
-              </div>
-            </div>
+
 
             <p className="mt-8 text-center font-body-sm text-body-sm text-on-surface-variant">
               {t("login.noAccount")}{" "}

@@ -44,5 +44,8 @@
     "trending3": "تفاعلات الأدوية",
     "aiError": "تعذّر معالجة طلبك.",
     "networkError": "عذراً، تعذّر الوصول إلى المساعد الذكي. يرجى المحاولة مرة أخرى."
+  },
+  "footer": {
+    "copyright": "© 2026 PharmSense Digital Healthcare. جميع الحقوق محفوظة."
   }
 }

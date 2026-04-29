@@ -44,5 +44,8 @@
     "trending3": "Medication Interactions",
     "aiError": "I could not process that request.",
     "networkError": "Sorry, I could not reach the AI assistant. Please try again."
+  },
+  "footer": {
+    "copyright": "© 2026 PharmSense Digital Healthcare. All rights reserved."
   }
 }
