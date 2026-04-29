@@ -9,26 +9,26 @@
  * Add new pages by importing them and adding a <Route> inside <Routes>.
  */
 
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import { useAuth } from './hooks/useAuth'
-import Navbar from './components/layout/Navbar'
-import LoginPage from './pages/LoginPage'
-import DashboardPage from './pages/DashboardPage'
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { useAuth } from "./hooks/useAuth";
+import Navbar from "./components/layout/Navbar";
+import LoginPage from "./pages/LoginPage";
+import DashboardPage from "./pages/DashboardPage";
 
 /**
  * ProtectedRoute — redirects unauthenticated users to /login.
  * Shows a loading state while the initial auth check is in-flight.
  */
 function ProtectedRoute({ children }) {
-  const { user, isLoading } = useAuth()
+  const { user, isLoading } = useAuth();
 
   if (isLoading) {
-    return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading…</div>
+    return <div style={{ padding: "2rem", textAlign: "center" }}>Loading…</div>;
   }
   if (!user) {
-    return <Navigate to="/login" replace />
+    return <Navigate to="/login" replace />;
   }
-  return children
+  return children;
 }
 
 export default function App() {
@@ -53,7 +53,5 @@ export default function App() {
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
-
-
