@@ -18,7 +18,7 @@ async def chat(
     products: AsyncIOMotorCollection = Depends(get_products_collection),
     _current_user: dict = Depends(get_current_user),
 ) -> ChatResponse:
-    logger.info("[REQUEST] POST /chat — message: %r", request.message)
+    logger.info("[REQUEST] POST /chat — message_length=%d", len(request.message))
     results = await service.respond(request.message, products)
     logger.info("[RESPONSE] POST /chat — %d product(s) returned", len(results))
     return ChatResponse(results=results)
