@@ -57,7 +57,7 @@ export default function Navbar() {
         </a>
 
         {/* Right side — consistent gap, vertically centered */}
-        <div className="flex items-center gap-1 text-on-surface-variant">
+        <div className="flex items-center gap-3 ms-4 text-on-surface-variant">
           <LanguageSwitcher />
 
           {/* Dark / Light toggle */}

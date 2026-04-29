@@ -169,12 +169,9 @@ export default function DashboardPage() {
         {/* Hero — centred vertically when no messages */}
         {!hasMessages && (
           <div className="flex flex-col items-center text-center gap-4 pb-8">
-            <h1 className="font-h1 text-[26px] sm:text-[32px] md:text-h1 font-extrabold leading-tight text-primary max-w-4xl">
+            <h1 className="font-h1 text-[26px] sm:text-[32px] md:text-h1 font-extrabold leading-tight text-primary dark:text-white max-w-4xl">
               {t("dashboard.heroTitle")}
             </h1>
-            <p className="font-body-sm text-body-sm text-outline">
-              {t("dashboard.poweredBy")}
-            </p>
           </div>
         )}
       </main>
@@ -195,7 +192,7 @@ export default function DashboardPage() {
                 key={i}
                 type="button"
                 onClick={() => setQuery(t(`dashboard.trending${i}`))}
-                className="w-full text-center px-4 py-2.5 bg-surface-container-lowest border border-outline-variant/60 text-on-surface-variant font-body-sm text-body-sm rounded-full hover:border-primary/50 hover:text-primary hover:shadow-sm hover:bg-surface-container-low transition-all duration-200 shadow-sm truncate"
+                className="w-full text-center px-4 py-2.5 bg-surface-container-lowest border border-outline-variant/60 dark:border-slate-500 text-on-surface-variant dark:text-white font-body-sm text-body-sm rounded-full hover:border-primary/50 hover:text-primary hover:shadow-sm hover:bg-surface-container-low transition-all duration-200 shadow-sm truncate"
               >
                 {t(`dashboard.trending${i}`)}
               </button>
@@ -212,13 +209,14 @@ export default function DashboardPage() {
           <div className="relative w-full group">
             {/* Outer ambient glow */}
             <div className="absolute -inset-1.5 bg-gradient-to-r from-blue-400/35 to-teal-400/35 rounded-[28px] blur-lg opacity-55 group-focus-within:opacity-100 group-hover:opacity-80 transition-opacity duration-500" />
-            {/* Input row */}
-            <div className="relative flex items-center bg-surface-container-lowest rounded-[20px] sm:rounded-[24px] px-3 sm:px-6 py-3 sm:py-4 shadow-[0_8px_36px_rgba(0,120,255,0.14),0_2px_12px_rgba(0,85,165,0.09)] dark:shadow-[0_8px_36px_rgba(0,0,0,0.35)] border border-outline-variant/50 focus-within:border-primary/40 focus-within:shadow-[0_10px_44px_rgba(0,120,255,0.24)] dark:focus-within:shadow-[0_10px_44px_rgba(91,155,213,0.2)] transition-all duration-300">
-              <span className="material-symbols-outlined text-primary-container ms-1 shrink-0">
+            {/* Input row — dir=ltr keeps physical left/right for icon/button placement */}
+            <div dir="ltr" className="relative bg-surface-container-lowest rounded-[20px] sm:rounded-[24px] px-3 sm:px-6 py-3 sm:py-4 shadow-[0_8px_36px_rgba(0,120,255,0.14),0_2px_12px_rgba(0,85,165,0.09)] dark:shadow-[0_8px_36px_rgba(0,0,0,0.35)] border border-outline-variant/50 focus-within:border-primary/40 focus-within:shadow-[0_10px_44px_rgba(0,120,255,0.24)] dark:focus-within:shadow-[0_10px_44px_rgba(91,155,213,0.2)] transition-all duration-300">
+              <span className="material-symbols-outlined text-primary-container absolute inset-y-0 left-4 sm:left-6 flex items-center pointer-events-none">
                 local_pharmacy
               </span>
               <input
-                className="w-full bg-transparent border-none focus:ring-0 font-body-lg text-body-lg text-on-surface placeholder:text-outline h-[56px] px-5 outline-none"
+                dir={["he", "ar"].includes(i18n.language) ? "rtl" : "ltr"}
+                className="w-full bg-transparent border-none focus:ring-0 font-body-lg text-body-lg text-on-surface placeholder:text-outline dark:placeholder:text-slate-400 h-[56px] outline-none pl-10 sm:pl-12 pr-[140px] sm:pr-[160px]"
                 placeholder={t("dashboard.askPlaceholder")}
                 type="text"
                 value={query}
@@ -228,10 +226,13 @@ export default function DashboardPage() {
               <button
                 type="submit"
                 disabled={isLoading || !query.trim()}
-                className="bg-primary text-on-primary dark:bg-[#3b82f6] dark:text-white rounded-xl px-3 sm:px-6 py-3 font-button text-button hover:-translate-y-0.5 transition-transform shadow-md me-1 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
+                className="absolute inset-y-0 right-3 sm:right-4 my-auto bg-[#003e7b] text-white rounded-xl px-3 sm:px-5 py-2.5 font-button text-button hover:-translate-y-0.5 transition-transform shadow-md flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed h-[42px]"
+                style={{ flexDirection: ["he", "ar"].includes(i18n.language) ? "row-reverse" : "row" }}
               >
                 <span className="ask-btn-label hidden sm:inline">{t("dashboard.askBtn")}</span>
-                <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+                <span className="material-symbols-outlined text-[20px]">
+                  {["he", "ar"].includes(i18n.language) ? "arrow_back" : "arrow_forward"}
+                </span>
               </button>
             </div>
           </div>
