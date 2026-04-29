@@ -11,26 +11,38 @@ async def main():
     import bcrypt
     from datetime import datetime, timezone
 
-    client = AsyncIOMotorClient("mongodb://localhost:27017")
+    import os
+    from dotenv import load_dotenv
+    load_dotenv(pathlib.Path(__file__).parent / ".env")
+    uri = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
+    client = AsyncIOMotorClient(uri)
     db = client["pharmsense"]
     users = db["users"]
 
     email = "admin@pharmsense.dev"
-    existing = await users.find_one({"email": email})
-    if existing:
-        print("Admin user already exists, id:", str(existing["_id"]))
+    hashed = bcrypt.hashpw(b"admin123", bcrypt.gensalt()).decode("utf-8")
+    now = datetime.now(timezone.utc)
+
+    doc = {
+        "name": "Admin",
+        "email": email,
+        "password_hash": hashed,
+        "age": 0,
+        "gender": "other",
+        "city": "HQ",
+        "language": "en",
+        "is_active": True,
+        "created_at": now,
+        "updated_at": now,
+        "last_login_at": None,
+    }
+
+    result = await users.replace_one({"email": email}, doc, upsert=True)
+
+    if result.upserted_id:
+        print("Admin user created, id:", str(result.upserted_id))
     else:
-        hashed = bcrypt.hashpw(b"admin123", bcrypt.gensalt()).decode("utf-8")
-        doc = {
-            "email": email,
-            "hashed_password": hashed,
-            "full_name": "Admin",
-            "is_active": True,
-            "is_admin": True,
-            "created_at": datetime.now(timezone.utc),
-        }
-        result = await users.insert_one(doc)
-        print("Admin user created, id:", str(result.inserted_id))
+        print("Admin user updated (existing doc replaced)")
 
     client.close()
 

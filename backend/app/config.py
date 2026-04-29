@@ -16,8 +16,8 @@ class Settings(BaseSettings):
     DEBUG: bool = True
 
     # ── MongoDB Atlas ─────────────────────────────────────────────────────────
-    MONGODB_URI: str = "mongodb://localhost:27017"
-    MONGODB_DB_NAME: str = "pharmsense"
+    MONGODB_URI: str
+    MONGODB_DB_NAME: str = "pharmasy"
 
     # ── Security ─────────────────────────────────────────────────────────────
     SECRET_KEY: str
