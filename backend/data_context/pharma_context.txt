@@ -1,0 +1,116 @@
+PharmSense Local Knowledge Base — Pharmaceutical Context
+=========================================================
+
+SECTION 1: DRUG INTERACTIONS
+------------------------------
+Drug interactions occur when one drug affects the activity of another when both are administered together. Common interaction types include pharmacokinetic interactions (affecting absorption, distribution, metabolism, or excretion) and pharmacodynamic interactions (affecting receptor activity).
+
+Key CYP450 inhibitors that increase plasma levels of co-administered drugs:
+- Fluconazole (CYP2C9 inhibitor): increases warfarin levels, raising bleeding risk.
+- Clarithromycin (CYP3A4 inhibitor): increases statins (simvastatin, atorvastatin) levels, risk of myopathy.
+- Amiodarone (CYP2D6/CYP3A4 inhibitor): increases digoxin levels, risk of toxicity.
+- Grapefruit juice (CYP3A4 inhibitor): increases felodipine, cyclosporine, and many other drug levels.
+
+Key CYP450 inducers that decrease plasma levels:
+- Rifampicin: significantly reduces levels of anticoagulants, oral contraceptives, and immunosuppressants.
+- Carbamazepine: lowers plasma levels of many anticonvulsants and antidepressants.
+- St. John's Wort: reduces levels of HIV protease inhibitors and cyclosporine.
+
+Clinically significant interactions to monitor:
+- Warfarin + NSAIDs: increased bleeding risk (pharmacodynamic interaction).
+- ACE inhibitors + Potassium-sparing diuretics: risk of hyperkalemia.
+- MAOIs + SSRIs: risk of serotonin syndrome (contraindicated).
+- Methotrexate + NSAIDs: NSAIDs reduce methotrexate renal excretion, increasing toxicity.
+- Lithium + Thiazide diuretics: reduced lithium clearance, risk of lithium toxicity.
+
+
+SECTION 2: COMMON MEDICATIONS AND INDICATIONS
+------------------------------------------------
+Metformin (Biguanide):
+  - Indication: Type 2 diabetes mellitus, first-line oral agent.
+  - Mechanism: Reduces hepatic glucose production, improves insulin sensitivity.
+  - Contraindications: eGFR < 30 mL/min/1.73m², IV contrast procedures (hold 48h before/after).
+  - Adverse effects: GI upset (take with food), lactic acidosis (rare), B12 deficiency (long-term use).
+
+Atorvastatin (HMG-CoA reductase inhibitor):
+  - Indication: Hyperlipidemia, cardiovascular risk reduction.
+  - Mechanism: Inhibits cholesterol synthesis in the liver.
+  - Monitoring: LFTs at baseline; CPK if myopathy symptoms.
+  - Interactions: Avoid with fibrates (myopathy risk); CYP3A4 inhibitors increase levels.
+
+Lisinopril (ACE inhibitor):
+  - Indication: Hypertension, heart failure, post-MI, diabetic nephropathy.
+  - Mechanism: Inhibits angiotensin-converting enzyme, reducing angiotensin II.
+  - Adverse effects: Dry cough (10-20% patients), angioedema (rare but serious), hyperkalemia.
+  - Contraindications: Pregnancy, bilateral renal artery stenosis, history of ACE inhibitor-induced angioedema.
+
+Amoxicillin (Aminopenicillin):
+  - Indication: Upper respiratory infections, H. pylori eradication, UTI, otitis media.
+  - Spectrum: Gram-positive cocci, some Gram-negative rods (E. coli, H. influenzae).
+  - Adverse effects: GI upset, allergic reactions (rash, anaphylaxis in penicillin allergy).
+  - Dose adjustment: Required in severe renal impairment (eGFR < 30).
+
+Omeprazole (Proton Pump Inhibitor):
+  - Indication: GERD, peptic ulcer disease, H. pylori eradication (triple therapy), Zollinger-Ellison syndrome.
+  - Mechanism: Irreversibly inhibits H+/K+-ATPase in gastric parietal cells.
+  - Long-term risks: Hypomagnesemia, C. difficile infection, vitamin B12 deficiency, osteoporosis (prolonged use).
+  - Drug interaction: Reduces clopidogrel activation (CYP2C19 competition); consider pantoprazole as alternative.
+
+Levothyroxine (T4 replacement):
+  - Indication: Hypothyroidism, thyroid cancer suppression.
+  - Administration: Take on empty stomach, 30-60 minutes before food; separate from calcium, iron, antacids by 4 hours.
+  - Monitoring: TSH levels (check 6-8 weeks after dose change).
+  - Interactions: Calcium carbonate, ferrous sulfate, and soy reduce absorption.
+
+
+SECTION 3: ADVERSE DRUG REACTIONS (ADRs)
+------------------------------------------
+Classification of ADRs (Rawlins-Thompson):
+  - Type A (Augmented): Dose-dependent, predictable from pharmacology. Examples: beta-blocker bradycardia, statin myopathy.
+  - Type B (Bizarre): Idiosyncratic, not dose-dependent. Examples: penicillin anaphylaxis, halothane hepatitis.
+  - Type C (Chronic): Long-term use effects. Example: HPA suppression with prolonged corticosteroids.
+  - Type D (Delayed): Emerge after long latency. Example: chemotherapy-induced secondary malignancies.
+  - Type E (End of use): Withdrawal reactions. Example: benzodiazepine discontinuation syndrome.
+
+High-risk ADR scenarios:
+  - Narrow therapeutic index drugs (warfarin, digoxin, lithium, phenytoin): require routine monitoring.
+  - Elderly patients: reduced renal/hepatic clearance increases drug accumulation risk.
+  - Renal impairment: drugs excreted renally (metformin, aminoglycosides, NSAIDs) require dose adjustment.
+  - Hepatic impairment: drugs with high hepatic metabolism (lidocaine, morphine) require caution.
+
+
+SECTION 4: REGULATORY AND SAFETY
+-----------------------------------
+Pharmacovigilance: The science of detecting, assessing, understanding, and preventing adverse effects.
+  - Yellow Card Scheme (UK MHRA): Voluntary reporting system for suspected ADRs.
+  - FDA MedWatch (US): Similar voluntary and mandatory reporting for serious ADRs.
+  - EU EMA: Coordinates pharmacovigilance across European member states via EudraVigilance.
+
+Risk Management Plans (RMPs):
+  - Required for new marketing authorizations in the EU.
+  - Include safety specification, pharmacovigilance plan, and risk minimization measures.
+
+Medication Reconciliation:
+  - Process of comparing a patient's medication orders to all the medications the patient has been taking.
+  - Critical at care transitions (admission, discharge, transfer) to prevent medication errors.
+  - Errors of omission (missing a medication) are the most common type.
+
+
+SECTION 5: PHARMACEUTICAL CALCULATIONS
+-----------------------------------------
+Creatinine Clearance (Cockcroft-Gault):
+  CrCl (mL/min) = [(140 - age) × weight(kg)] / [72 × serum creatinine (mg/dL)]
+  Multiply by 0.85 for female patients.
+  Used to dose-adjust renally-cleared medications.
+
+Body Surface Area (Mosteller formula):
+  BSA (m²) = sqrt([height(cm) × weight(kg)] / 3600)
+  Used for chemotherapy dosing.
+
+Loading Dose:
+  LD = (Vd × Target Cp) / F
+  Where Vd = volume of distribution, Cp = target plasma concentration, F = bioavailability.
+
+Maintenance Dose:
+  MD = (CL × Target Css × tau) / F
+  Where CL = clearance, Css = steady-state concentration, tau = dosing interval.
