@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     MONGODB_URI: str
     MONGODB_DB_NAME: str 
     MONGODB_USERS_COLLECTION: str = "Users"
+    MONGODB_PRODUCTS_COLLECTION: str = "Products"
 
     # ── Security ─────────────────────────────────────────────────────────────
     SECRET_KEY: str
@@ -34,13 +35,14 @@ class Settings(BaseSettings):
         return [o.strip() for o in self.CORS_ORIGINS.split(",") if o.strip()]
 
     # ── LLM ──────────────────────────────────────────────────────────────────
-    LLM_PROVIDER: Literal["openai", "anthropic"] = "openai"
+    LLM_PROVIDER: Literal["openai", "anthropic", "gemini"] = "openai"
     LLM_MODEL: str = "gpt-4o-mini"
     LLM_TEMPERATURE: float = Field(default=0.2, ge=0.0, le=2.0)
 
     # API keys — only the key matching LLM_PROVIDER is required at runtime
     OPENAI_API_KEY: str = ""
     ANTHROPIC_API_KEY: str = ""
+    GEMINI_API_KEY: str = ""
 
     model_config = SettingsConfigDict(
         env_file=".env",

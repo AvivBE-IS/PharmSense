@@ -1,17 +1,24 @@
+import logging
+
 from fastapi import APIRouter, Depends
+from motor.motor_asyncio import AsyncIOMotorCollection
 
-from app.core.dependencies import get_current_user
+from app.core.dependencies import get_current_user, get_products_collection
 from app.schemas.chat import ChatRequest, ChatResponse
-from app.services.chat import ChatService, get_chat_service
+from app.services.llm import LLMService, get_llm_service
 
+logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/chat", tags=["chat"])
 
 
-@router.post("", response_model=ChatResponse, summary="Send a message to the AI assistant")
+@router.post("", response_model=ChatResponse)
 async def chat(
     request: ChatRequest,
-    service: ChatService = Depends(get_chat_service),
+    service: LLMService = Depends(get_llm_service),
+    products: AsyncIOMotorCollection = Depends(get_products_collection),
     _current_user: dict = Depends(get_current_user),
 ) -> ChatResponse:
-    result = service.respond(request.message, locale=request.locale)
-    return ChatResponse(**result)
+    logger.info("[REQUEST] POST /chat — message_length=%d", len(request.message))
+    results = await service.respond(request.message, products)
+    logger.info("[RESPONSE] POST /chat — %d product(s) returned", len(results))
+    return ChatResponse(results=results)

@@ -1,19 +1,15 @@
 import logging
-from typing import Optional, TypedDict
+from typing import List, Optional
 
-from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
-from langgraph.graph import END, StateGraph
+from motor.motor_asyncio import AsyncIOMotorCollection
 
 from app.config import settings
-from app.services.chat.retriever import ContextLoader, TextSearchRetriever
+from app.schemas.product import ProductOut
+from app.services.llm.chains import make_correction_chain
+from app.services.llm.loader import load_medication_names
+from app.services.llm.tools import make_search_tool
 
 logger = logging.getLogger(__name__)
-
-
-class LLMState(TypedDict):
-    user_message: str
-    context: str
-    answer: str
 
 
 def _build_llm():
@@ -29,62 +25,45 @@ def _build_llm():
         from langchain_anthropic import ChatAnthropic
         return ChatAnthropic(model=model, temperature=temperature, api_key=settings.ANTHROPIC_API_KEY or None)
 
-    raise ValueError(f"Unsupported LLM_PROVIDER: {provider!r}. Choose 'openai' or 'anthropic'.")
+    if provider == "gemini":
+        from langchain_google_genai import ChatGoogleGenerativeAI
+        return ChatGoogleGenerativeAI(model=model, temperature=temperature, google_api_key=settings.GEMINI_API_KEY or None)
+
+    raise ValueError(f"Unsupported LLM_PROVIDER: {provider!r}. Choose 'openai', 'anthropic', or 'gemini'.")
 
 
 class LLMService:
-    SYSTEM_PROMPT_TEMPLATE = (
-        "You are PharmSense, a professional pharmaceutical AI assistant.\n\n"
-        "LANGUAGE RULE (CRITICAL): Detect the language of the user's message and respond "
-        "EXCLUSIVELY in that same language. Never switch to English unless the user writes in English. "
-        "If the user writes in Hebrew (עברית), respond in Hebrew. "
-        "If in Arabic (عربي), respond in Arabic. "
-        "If in Russian, respond in Russian.\n\n"
-        "ANSWER RULE: Use the context below to answer. "
-        "If the answer is NOT in the context, do NOT refuse — instead, draw on your general "
-        "pharmaceutical knowledge and provide helpful guidance, then add this disclaimer on a "
-        "new line: '⚠️ لم يتم العثور على هذه المعلومات في قاعدة بياناتنا المحلية — يستند هذا للمعرفة الصيدلانية العامة. يُرجى استشارة طبيب أو صيدلاني مرخّص.' "
-        "(translate the disclaimer to the user's language).\n\n"
-        "--- CONTEXT ---\n{context}\n--- END CONTEXT ---"
-    )
-
     def __init__(self) -> None:
-        loader = ContextLoader()
-        self._retriever = TextSearchRetriever(loader)
         self._llm = _build_llm()
-        self._graph = self._build_graph()
+        self._correction_chain = make_correction_chain(self._llm)
+        self._medication_names: Optional[List[str]] = None
         logger.info("LLMService ready — provider=%s model=%s", settings.LLM_PROVIDER, settings.LLM_MODEL)
 
-    def _retrieve(self, state: LLMState) -> dict:
-        chunks = self._retriever.retrieve(state["user_message"], top_k=4)
-        context = "\n\n".join(f"[{c.source} | {c.score:.0%}]\n{c.text}" for c in chunks)
-        return {"context": context or "No relevant context found."}
+    async def _get_medication_names(self) -> List[str]:
+        if self._medication_names is None:
+            self._medication_names = await load_medication_names()
+        return self._medication_names
 
-    def _generate(self, state: LLMState) -> dict:
-        system_prompt = self.SYSTEM_PROMPT_TEMPLATE.format(context=state["context"])
-        messages = [
-            SystemMessage(content=system_prompt),
-            HumanMessage(content=state["user_message"]),
-        ]
-        response: AIMessage = self._llm.invoke(messages)
-        return {"answer": response.content}
+    async def respond(self, message: str, collection: AsyncIOMotorCollection) -> List[ProductOut]:
+        logger.info("[CHAT] User message: %r", message)
 
-    def _build_graph(self):
-        graph = StateGraph(LLMState)
-        graph.add_node("retrieve", self._retrieve)
-        graph.add_node("generate", self._generate)
-        graph.set_entry_point("retrieve")
-        graph.add_edge("retrieve", "generate")
-        graph.add_edge("generate", END)
-        return graph.compile()
+        # Step 1 — load medication names from DB and correct the user input
+        medication_names = await self._get_medication_names()
+        corrected_name = await self._correction_chain.ainvoke({
+            "user_input": message,
+            "medication_names": "\n".join(medication_names),
+        })
+        logger.info("[CHAT] LLM corrected name: %r → %r", message, corrected_name)
 
-    def respond(self, message: str) -> dict:
-        final_state: LLMState = self._graph.invoke({"user_message": message})
-        return {
-            "reply": final_state["answer"],
-            "sources": [],
-            "data_source": f"{settings.LLM_PROVIDER}/{settings.LLM_MODEL}",
-        }
+        # Step 2 — search the database with the corrected name
+        search_tool = make_search_tool(collection)
+        raw_results = await search_tool.ainvoke({"query": corrected_name})
+        logger.info("[CHAT] DB returned %d result(s) for %r", len(raw_results), corrected_name)
+
+        # Step 3 — return product objects to the endpoint
+        results = [ProductOut(**item) for item in raw_results]
+        logger.info("[CHAT] Returning %d product(s) to endpoint", len(results))
+        return results
 
 
 _llm_service: Optional[LLMService] = None
