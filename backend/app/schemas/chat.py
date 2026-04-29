@@ -10,8 +10,8 @@ class ChatRequest(BaseModel):
     locale: Optional[str] = Field(
         None,
         max_length=35,
-        pattern=r"^[A-Za-z0-9]{2,8}(?:-[A-Za-z0-9]{1,8})*$",
-        description="BCP-47 locale tag (e.g. 'he', 'ar', 'en', 'ru', 'zh-Hans').",
+        pattern=r"^[A-Za-z0-9]{2,8}(?:[-_][A-Za-z0-9]{1,8})*$",
+        description="Locale tag (e.g. 'he', 'ar', 'en', 'ru', 'zh-Hans', 'zh_Hans').",
     )
 
 
