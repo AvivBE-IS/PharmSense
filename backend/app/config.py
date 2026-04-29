@@ -17,7 +17,7 @@ class Settings(BaseSettings):
 
     # ── MongoDB Atlas ─────────────────────────────────────────────────────────
     MONGODB_URI: str
-    MONGODB_DB_NAME: str = "pharmasy"
+    MONGODB_DB_NAME: str 
 
     # ── Security ─────────────────────────────────────────────────────────────
     SECRET_KEY: str
