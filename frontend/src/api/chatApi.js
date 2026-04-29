@@ -16,7 +16,7 @@ import apiClient from "./authApi";
  *
  * @typedef {{ source: string, snippet: string, relevance_score: number }} SourceInfo
  */
-export async function sendMessage(message) {
-  const { data } = await apiClient.post("/chat", { message });
+export async function sendMessage(message, locale = "en") {
+  const { data } = await apiClient.post("/chat", { message, locale });
   return data;
 }

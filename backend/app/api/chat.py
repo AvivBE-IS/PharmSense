@@ -13,5 +13,5 @@ async def chat(
     service: ChatService = Depends(get_chat_service),
     _current_user: dict = Depends(get_current_user),
 ) -> ChatResponse:
-    result = service.respond(request.message)
+    result = service.respond(request.message, locale=request.locale)
     return ChatResponse(**result)

@@ -28,29 +28,11 @@ export default function Navbar() {
           PharmSense
         </Link>
 
-        {/* Nav links */}
+        {/* Nav links — only Health AI kept */}
         <nav
           className="hidden md:flex space-x-1 text-sm font-medium tracking-wide"
           style={{ fontFamily: "Manrope, sans-serif" }}
         >
-          <Link
-            to="/catalog"
-            className="text-slate-500 hover:text-blue-600 hover:bg-blue-50/50 rounded-lg transition-all duration-300 px-3 py-2"
-          >
-            {t("nav.prescriptions")}
-          </Link>
-          <Link
-            to="/catalog"
-            className="text-slate-500 hover:text-blue-600 hover:bg-blue-50/50 rounded-lg transition-all duration-300 px-3 py-2"
-          >
-            {t("nav.refills")}
-          </Link>
-          <Link
-            to="/catalog"
-            className="text-slate-500 hover:text-blue-600 hover:bg-blue-50/50 rounded-lg transition-all duration-300 px-3 py-2"
-          >
-            {t("nav.pharmacyFinder")}
-          </Link>
           <Link
             to="/dashboard"
             className={`rounded-lg transition-all duration-300 px-3 py-2 ${
@@ -73,7 +55,7 @@ export default function Navbar() {
           {user ? (
             <>
               <div className="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center text-sm font-bold">
-                {(user.full_name || user.email).charAt(0).toUpperCase()}
+                {(user.name || user.email).charAt(0).toUpperCase()}
               </div>
               <button
                 onClick={handleLogout}
