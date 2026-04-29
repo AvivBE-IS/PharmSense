@@ -11,7 +11,7 @@ class ChatRequest(BaseModel):
         None,
         max_length=35,
         pattern=r"^[A-Za-z0-9]{2,8}(?:[-_][A-Za-z0-9]{1,8})*$",
-        description="Locale tag (e.g. 'he', 'ar', 'en', 'ru', 'zh-Hans', 'zh_Hans').",
+        description="Locale tag (e.g. 'he', 'ar', 'en', 'ru', 'zh-Hans', 'en_US').",
     )
 
 
