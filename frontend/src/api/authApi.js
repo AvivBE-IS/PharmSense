@@ -7,23 +7,23 @@
  * so the base URL stays relative and works in any environment.
  */
 
-import axios from 'axios'
+import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: '/api/v1',
-  headers: { 'Content-Type': 'application/json' },
-})
+  baseURL: "/api",
+  headers: { "Content-Type": "application/json" },
+});
 
 /**
  * Attach the JWT Bearer token to every request when one is stored.
  */
 apiClient.interceptors.request.use((config) => {
-  const token = localStorage.getItem('access_token')
+  const token = localStorage.getItem("access_token");
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`
+    config.headers.Authorization = `Bearer ${token}`;
   }
-  return config
-})
+  return config;
+});
 
 // ── Auth endpoints ────────────────────────────────────────────────────────────
 
@@ -32,8 +32,8 @@ apiClient.interceptors.request.use((config) => {
  * @returns {{ access_token: string, token_type: string }}
  */
 export async function login(email, password) {
-  const { data } = await apiClient.post('/auth/login', { email, password })
-  return data
+  const { data } = await apiClient.post("/auth/login", { email, password });
+  return data;
 }
 
 /**
@@ -41,8 +41,8 @@ export async function login(email, password) {
  * @returns {Object} UserOut schema
  */
 export async function getMe() {
-  const { data } = await apiClient.get('/auth/me')
-  return data
+  const { data } = await apiClient.get("/auth/me");
+  return data;
 }
 
-export default apiClient
+export default apiClient;

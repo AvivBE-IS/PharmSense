@@ -6,7 +6,7 @@
  *   from components — keep API calls centralized here.
  */
 
-import apiClient from './authApi'
+import apiClient from "./authApi";
 
 /**
  * Send a user message to the AI assistant.
@@ -17,6 +17,6 @@ import apiClient from './authApi'
  * @typedef {{ source: string, snippet: string, relevance_score: number }} SourceInfo
  */
 export async function sendMessage(message) {
-  const { data } = await apiClient.post('/chat', { message })
-  return data
+  const { data } = await apiClient.post("/chat", { message });
+  return data;
 }
