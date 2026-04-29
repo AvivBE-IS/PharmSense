@@ -14,10 +14,12 @@ async def main():
     import os
     from dotenv import load_dotenv
     load_dotenv(pathlib.Path(__file__).parent / ".env")
-    uri = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
+    uri = os.getenv("MONGODB_URI")
     client = AsyncIOMotorClient(uri)
-    db = client["pharmsense"]
-    users = db["users"]
+    db_name = os.getenv("MONGODB_DB_NAME")
+    db = client[db_name]
+    users_collection_name = os.getenv("MONGODB_USERS_COLLECTION", "Users")
+    users = db[users_collection_name]
 
     email = "admin@pharmsense.dev"
     hashed = bcrypt.hashpw(b"admin123", bcrypt.gensalt()).decode("utf-8")

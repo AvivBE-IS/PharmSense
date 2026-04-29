@@ -17,8 +17,10 @@ def get_db() -> AsyncIOMotorDatabase:
     return get_database()
 
 
+from app.config import settings
+
 def get_users_collection(db: AsyncIOMotorDatabase = Depends(get_db)) -> AsyncIOMotorCollection:
-    return db["users"]
+    return db[settings.MONGODB_USERS_COLLECTION]
 
 
 async def get_current_user(

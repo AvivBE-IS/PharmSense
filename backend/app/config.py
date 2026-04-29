@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     # ── MongoDB Atlas ─────────────────────────────────────────────────────────
     MONGODB_URI: str
     MONGODB_DB_NAME: str 
+    MONGODB_USERS_COLLECTION: str = "Users"
 
     # ── Security ─────────────────────────────────────────────────────────────
     SECRET_KEY: str

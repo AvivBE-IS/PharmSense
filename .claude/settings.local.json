@@ -10,7 +10,9 @@
       "Bash(git -C /Users/ariguterman/Documents/Code/CyberPro/Hackathon/PharmSense merge origin/main)",
       "Bash(npm install *)",
       "Bash(.venv/bin/python seed_admin.py)",
-      "Bash(.venv/bin/python -c ' *)"
+      "Bash(.venv/bin/python -c ' *)",
+      "Bash(docker compose *)",
+      "Bash(docker-compose ps *)"
     ]
   }
 }
