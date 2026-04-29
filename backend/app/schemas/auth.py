@@ -1,7 +1,19 @@
-from datetime import datetime
-from typing import Optional
+"""
+Schemas for authentication endpoints only.
+User read/write schemas live in schemas/user.py.
+"""
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
+
+
+class RegisterRequest(BaseModel):
+    name: str
+    email: EmailStr
+    password: str = Field(min_length=8)
+    age: int = Field(ge=0, le=150)
+    gender: str
+    city: str
+    language: str = "en"
 
 
 class LoginRequest(BaseModel):
@@ -9,15 +21,16 @@ class LoginRequest(BaseModel):
     password: str
 
 
+class RefreshRequest(BaseModel):
+    refresh_token: str
+
+
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
 
 
-class UserOut(BaseModel):
-    id: str
-    email: EmailStr
-    full_name: Optional[str]
-    is_active: bool
-    is_admin: bool
-    created_at: datetime
+class TokenPairResponse(BaseModel):
+    access_token: str
+    refresh_token: str
+    token_type: str = "bearer"
