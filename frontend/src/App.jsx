@@ -1,46 +1,46 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-
 import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';         // מבוסס על temp1.html
-import Inventory from './pages/Inventory';         // מבוסס על temp2.html
-import MedicationDetails from './pages/MedicationDetails.jsx'; // מבוסס על temp3.html
-import Profile from './pages/Profile';             // מבוסס על temp4.html
+import Dashboard from './pages/Dashboard';
+import Inventory from './pages/Inventory';
+import MedicationDetails from './pages/MedicationDetails';
+import Profile from './pages/Profile';
+import Chat from './pages/Chat'; // וודא שהקובץ קיים בתיקיית pages
+
+const AppContent = ({ isAuthenticated, setIsAuthenticated }) => {
+  const location = useLocation();
+  const isLoginPage = location.pathname === '/login';
+
+  return (
+    <div className="min-h-screen flex flex-col bg-slate-50 antialiased font-body-md">
+      {!isLoginPage && isAuthenticated && <Navbar />}
+      <main className="flex-grow flex flex-col">
+        <Routes>
+          <Route path="/" element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} />
+          <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+          <Route path="/inventory" element={isAuthenticated ? <Inventory /> : <Navigate to="/login" />} />
+          <Route path="/inventory/:id" element={isAuthenticated ? <MedicationDetails /> : <Navigate to="/login" />} />
+          <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/login" />} />
+          <Route path="/chat" element={isAuthenticated ? <Chat /> : <Navigate to="/login" />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </main>
+      {!isLoginPage && isAuthenticated && <Footer />}
+    </div>
+  );
+};
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem('userLoggedIn') === 'true';
+  });
+
   return (
     <Router>
-      <div className="min-h-screen flex flex-col bg-background text-on-background font-body-md antialiased">
-
-        <Navbar />
-
-        {/* כאן מתבצעת החלפת התוכן המרכזי לפי הכתובת בדפדפן */}
-        <main className="flex-grow">
-          <Routes>
-            {/* דף הבית - דשבורד ה-AI */}
-            <Route path="/" element={<Dashboard />} />
-
-            {/* דף התחברות */}
-            <Route path="/login" element={<Login />} />
-
-            {/* קטלוג התרופות המלא */}
-            <Route path="/inventory" element={<Inventory />} />
-
-            {/* דף פרטי תרופה ספציפית (משתמש ב-ID דינמי) */}
-            <Route path="/inventory/:id" element={<MedicationDetails />} />
-
-            {/* פרופיל משתמש אישי */}
-            <Route path="/profile" element={<Profile />} />
-          </Routes>
-        </main>
-
-        {/* ה-Footer יופיע בתחתית כל הדפים */}
-        <Footer />
-
-      </div>
+      <AppContent isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
     </Router>
   );
 }
