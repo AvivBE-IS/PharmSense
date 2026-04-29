@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PharmSense - AI Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#93000a",
+                    "primary": "#003e7b",
+                    "on-secondary-fixed": "#002020",
+                    "surface": "#f9f9ff",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#263143",
+                    "inverse-primary": "#a8c8ff",
+                    "tertiary-fixed-dim": "#c4c7c9",
+                    "on-tertiary-container": "#c9cbcd",
+                    "primary-fixed": "#d6e3ff",
+                    "outline": "#727783",
+                    "on-error": "#ffffff",
+                    "surface-container": "#e7eeff",
+                    "on-secondary-fixed-variant": "#004f4f",
+                    "on-tertiary-fixed": "#191c1e",
+                    "on-secondary-container": "#006e6e",
+                    "surface-container-high": "#dee8ff",
+                    "secondary-container": "#90efef",
+                    "primary-fixed-dim": "#a8c8ff",
+                    "on-tertiary-fixed-variant": "#444749",
+                    "on-primary-fixed": "#001b3c",
+                    "on-primary-container": "#b0ccff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#175eae",
+                    "secondary": "#006a6a",
+                    "surface-bright": "#f9f9ff",
+                    "tertiary-container": "#535658",
+                    "on-surface": "#111c2d",
+                    "on-secondary": "#ffffff",
+                    "surface-dim": "#cfdaf2",
+                    "on-primary-fixed-variant": "#00468a",
+                    "surface-container-low": "#f0f3ff",
+                    "secondary-fixed-dim": "#76d6d5",
+                    "on-surface-variant": "#424751",
+                    "surface-variant": "#d8e3fb",
+                    "tertiary-fixed": "#e0e3e5",
+                    "tertiary": "#3c3f41",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#d8e3fb",
+                    "error-container": "#ffdad6",
+                    "background": "#f9f9ff",
+                    "secondary-fixed": "#93f2f2",
+                    "primary-container": "#0055a5",
+                    "on-background": "#111c2d",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#c2c6d3",
+                    "inverse-on-surface": "#ecf1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "48px",
+                    "unit": "8px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "label-bold": [
+                            "Inter"
+                    ],
+                    "h1": [
+                            "Manrope"
+                    ],
+                    "h3": [
+                            "Manrope"
+                    ],
+                    "button": [
+                            "Manrope"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ],
+                    "h2": [
+                            "Manrope"
+                    ],
+                    "body-sm": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {
+                    "label-bold": [
+                            "12px",
+                            {
+                                    "lineHeight": "1",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "h1": [
+                            "40px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "800"
+                            }
+                    ],
+                    "h3": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.4",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "button": [
+                            "16px",
+                            {
+                                    "lineHeight": "1",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.5",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "h2": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.3",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-sm": [
+                            "14px",
+                            {
+                                    "lineHeight": "1.5",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+        },
+        },
+      }
+    </script>
+</head>
+<body class="bg-[#F1F5F9] text-on-background min-h-screen flex flex-col antialiased">
+<!-- TopNavBar component generated from JSON -->
+<header class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100 dark:border-slate-800 shadow-[0_20px_40px_-15px_rgba(0,85,165,0.04)] w-full">
+<div class="max-w-7xl mx-auto flex justify-between items-center px-8 h-20 w-full">
+<div class="text-2xl font-black tracking-tighter text-blue-800 dark:text-blue-300">
+                PharmSense
+            </div>
+<nav class="hidden md:flex space-x-6 font-manrope text-sm font-medium tracking-wide">
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-300 px-3 py-2" href="#">Prescriptions</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-300 px-3 py-2" href="#">Refills</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-300 px-3 py-2" href="#">Pharmacy Finder</a>
+<a class="text-blue-700 dark:text-blue-400 border-b-2 border-blue-700 dark:border-blue-400 pb-1 px-3 py-2" href="#">Health AI</a>
+</nav>
+<div class="flex items-center space-x-4 text-blue-700 dark:text-blue-400">
+<button class="hover:bg-blue-50/50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-300 p-2">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:bg-blue-50/50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-300 p-2">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center p-8 max-w-7xl mx-auto w-full gap-16">
+<!-- Central AI Search -->
+<section class="w-full max-w-3xl flex flex-col items-center text-center space-y-8 mt-12">
+<h1 class="font-h1 text-h1 text-primary">How can I help you with your medication today?</h1>
+<div class="relative w-full group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary-container to-secondary-container rounded-[24px] blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+<div class="relative flex items-center bg-surface-container-lowest rounded-[24px] p-2 shadow-sm border border-[#E2E8F0]">
+<span class="material-symbols-outlined text-primary-container ml-4" data-icon="temp_preferences_custom">temp_preferences_custom</span>
+<input class="w-full bg-transparent border-none focus:ring-0 font-body-lg text-body-lg text-on-surface placeholder:text-outline h-[56px] px-4" placeholder="Ask PharmSense AI..." type="text"/>
+<button class="bg-primary text-on-primary rounded-xl px-6 py-3 font-button text-button hover:-translate-y-0.5 transition-transform shadow-md ml-2 flex items-center gap-2">
+<span>Ask AI</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-outline">Powered by advanced clinical intelligence.</p>
+</section>
+<!-- Quick Actions -->
+<section class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6">
+<a class="bg-surface-container-lowest rounded-[24px] p-8 border border-[#E2E8F0] shadow-[0_4px_20px_rgba(0,62,123,0.04)] hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4 cursor-pointer" href="#">
+<div class="bg-primary-fixed-dim/20 p-4 rounded-full text-primary-container group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-3xl" data-icon="upload_file">upload_file</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mt-2">Upload Prescription</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">Quickly scan or upload your new prescriptions for processing.</p>
+<div class="mt-4 font-label-bold text-label-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
+                    START <span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+</div>
+</a>
+<a class="bg-surface-container-lowest rounded-[24px] p-8 border border-[#E2E8F0] shadow-[0_4px_20px_rgba(0,62,123,0.04)] hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4 cursor-pointer" href="#">
+<div class="bg-secondary-fixed-dim/20 p-4 rounded-full text-secondary group-hover:bg-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-3xl" data-icon="medical_information">medical_information</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mt-2">Consult a Pharmacist</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">Connect with our clinical team for dosage or side-effect inquiries.</p>
+<div class="mt-4 font-label-bold text-label-bold text-secondary flex items-center gap-1 group-hover:gap-2 transition-all">
+                    CONNECT <span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+</div>
+</a>
+<a class="bg-surface-container-lowest rounded-[24px] p-8 border border-[#E2E8F0] shadow-[0_4px_20px_rgba(0,62,123,0.04)] hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4 cursor-pointer" href="#">
+<div class="bg-tertiary-fixed-dim/20 p-4 rounded-full text-tertiary group-hover:bg-tertiary-fixed transition-colors">
+<span class="material-symbols-outlined text-3xl" data-icon="inventory_2">inventory_2</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mt-2">My Regular Orders</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">Manage and track your recurring medication deliveries.</p>
+<div class="mt-4 font-label-bold text-label-bold text-tertiary flex items-center gap-1 group-hover:gap-2 transition-all">
+                    MANAGE <span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+</div>
+</a>
+</section>
+<!-- Trending Topics -->
+<section class="w-full max-w-4xl text-center space-y-6">
+<h4 class="font-label-bold text-label-bold text-outline uppercase tracking-widest">Trending Health Topics</h4>
+<div class="flex flex-wrap justify-center gap-3">
+<span class="px-6 py-2 bg-surface-container-high text-on-surface-variant font-body-sm text-body-sm rounded-full cursor-pointer hover:bg-surface-variant transition-colors border border-outline-variant/30 shadow-sm">Allergy Season Prep</span>
+<span class="px-6 py-2 bg-surface-container-high text-on-surface-variant font-body-sm text-body-sm rounded-full cursor-pointer hover:bg-surface-variant transition-colors border border-outline-variant/30 shadow-sm">Managing Hypertension</span>
+<span class="px-6 py-2 bg-surface-container-high text-on-surface-variant font-body-sm text-body-sm rounded-full cursor-pointer hover:bg-surface-variant transition-colors border border-outline-variant/30 shadow-sm">Vitamin D Supplements</span>
+<span class="px-6 py-2 bg-surface-container-high text-on-surface-variant font-body-sm text-body-sm rounded-full cursor-pointer hover:bg-surface-variant transition-colors border border-outline-variant/30 shadow-sm">Medication Interactions</span>
+</div>
+</section>
+</main>
+<!-- Footer component generated from JSON -->
+<footer class="bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 w-full mt-auto">
+<div class="max-w-7xl mx-auto px-8 py-16 flex flex-col md:flex-row justify-between items-center gap-8 w-full">
+<div class="font-bold text-slate-900 dark:text-slate-100 font-manrope text-xs uppercase tracking-widest text-slate-400 dark:text-slate-500">
+                © 2024 PharmSense Digital Healthcare. Clinical Excellence Guaranteed.
+            </div>
+<nav class="flex space-x-6 font-manrope text-xs uppercase tracking-widest">
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">Terms of Care</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">Privacy Shield</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">HIPAA Compliance</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">Pharmacist Login</a>
+</nav>
+</div>
+</footer>
+</body></html>

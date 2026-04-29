@@ -169,185 +169,110 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen relative overflow-hidden" style={{ background: '#0c0c18' }}>
-
-      {/* ── Ambient glow ── */}
-      <div
-        className="pointer-events-none absolute bottom-[-100px] left-1/2 -translate-x-1/2 w-[1100px] h-[600px] rounded-[50%]"
-        style={{ background: 'radial-gradient(ellipse, rgba(109,40,217,0.22) 0%, rgba(37,99,235,0.16) 40%, transparent 70%)', filter: 'blur(60px)' }}
-      />
-      {/* Dot grid */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage: 'radial-gradient(circle, rgba(148,163,184,0.12) 1px, transparent 1px)',
-          backgroundSize: '32px 32px',
-        }}
-      />
-
-      {/* ── Navbar spacer ── */}
-      <div className="h-14 flex-shrink-0" />
-
-      {/* ── HERO ── */}
-      {!hasMessages && (
-        <div className="flex-1 flex flex-col items-center justify-center px-6 text-center relative z-10" style={{ paddingBottom: '180px' }}>
-
-          {/* Badge */}
-          <div
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium mb-8"
-            style={{ background: 'rgba(124,58,237,0.15)', border: '1px solid rgba(124,58,237,0.3)', color: '#a78bfa' }}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            {dataSource} · Ready
+    <div className="bg-background text-on-background min-h-screen flex flex-col antialiased">
+      <header className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100 dark:border-slate-800 shadow-[0_20px_40px_-15px_rgba(0,85,165,0.04)] w-full">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-8 h-20 w-full">
+          <div className="text-2xl font-black tracking-tighter text-blue-800 dark:text-blue-300">
+            PharmSense
           </div>
-
-          {/* Headline */}
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] max-w-3xl mb-6" style={{ color: '#f1f5f9' }}>
-            Pharmaceutical{' '}
-            <span style={{ background: token.gradientHero, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              intelligence
-            </span>
-          </h1>
-          <p className="text-lg max-w-md leading-relaxed mb-10" style={{ color: '#64748b' }}>
-            Ask about drug interactions, adverse reactions,{' '}
-            dosing calculations, and clinical guidelines.
-          </p>
-
-          {/* Suggestion chips */}
-          <div className="flex flex-wrap gap-3 justify-center">
-            {CHIPS.map(chip => (
-              <button
-                key={chip.label}
-                onClick={() => { setInput(chip.label); setTimeout(() => inputRef.current?.focus(), 0) }}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all"
-                style={{
-                  background: token.surface,
-                  border: `1px solid ${token.border}`,
-                  color: '#cbd5e1',
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.background = 'rgba(124,58,237,0.12)'
-                  e.currentTarget.style.borderColor = 'rgba(124,58,237,0.4)'
-                  e.currentTarget.style.color = '#a78bfa'
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.background = token.surface
-                  e.currentTarget.style.borderColor = token.border
-                  e.currentTarget.style.color = '#cbd5e1'
-                }}
-              >
-                <span>{chip.icon}</span>
-                {chip.label}
-              </button>
-            ))}
+          <nav className="hidden md:flex space-x-6 font-manrope text-sm font-medium tracking-wide">
+            <a className="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-300 px-3 py-2" href="#">Prescriptions</a>
+            <a className="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-300 px-3 py-2" href="#">Refills</a>
+            <a className="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-300 px-3 py-2" href="#">Pharmacy Finder</a>
+            <a className="text-blue-700 dark:text-blue-400 border-b-2 border-blue-700 dark:border-blue-400 pb-1 px-3 py-2" href="#">Health AI</a>
+          </nav>
+          <div className="flex items-center space-x-4 text-blue-700 dark:text-blue-400">
+            <button className="hover:bg-blue-50/50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-300 p-2">
+              <span className="material-symbols-outlined" data-icon="notifications">notifications</span>
+            </button>
+            <button className="hover:bg-blue-50/50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-300 p-2">
+              <span className="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+            </button>
           </div>
         </div>
-      )}
-
-      {/* ── Message list ── */}
-      {hasMessages && (
-        <div className="flex-1 overflow-y-auto relative z-10">
-          <div className="max-w-2xl mx-auto px-4 pt-8 pb-6">
-            {messages.map(msg => <MessageBubble key={msg.id} message={msg} />)}
-            {isLoading && <TypingIndicator />}
-            {chatError && (
-              <div
-                className="text-sm rounded-xl px-4 py-3 mb-4 text-center"
-                style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', color: '#fca5a5' }}
-              >
-                {chatError}
-              </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
-        </div>
-      )}
-
-      {/* ── Input panel ── */}
-      <div className="relative z-10 flex-shrink-0 px-4 pb-6">
-        <div className="max-w-2xl mx-auto">
-          <div
-            className="rounded-2xl overflow-hidden"
-            style={{
-              background: 'rgba(19,19,37,0.9)',
-              border: `1px solid ${token.borderAccent}`,
-              boxShadow: '0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(124,58,237,0.08)',
-              backdropFilter: 'blur(20px)',
-            }}
-          >
-            {/* Text input */}
-            <textarea
-              ref={inputRef}
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              rows={1}
-              placeholder="Ask about a drug, interaction, or dosing calculation…"
-              disabled={isLoading}
-              className="w-full bg-transparent resize-none focus:outline-none disabled:opacity-50 leading-relaxed"
-              style={{
-                padding: '16px 20px 8px',
-                color: '#e2e8f0',
-                fontSize: '14px',
-                height: '56px',
-                maxHeight: '160px',
-                overflowY: 'auto',
-              }}
-              onInput={e => {
-                e.target.style.height = '56px'
-                e.target.style.height = `${Math.min(e.target.scrollHeight, 160)}px`
-              }}
-            />
-
-            {/* Toolbar */}
-            <div className="flex items-center justify-between px-4 pb-3">
-              {/* Left: data source */}
-              <div
-                className="flex items-center gap-2 text-xs px-3 py-1.5 rounded-full"
-                style={{ background: 'rgba(52,211,153,0.08)', border: '1px solid rgba(52,211,153,0.2)', color: '#34d399' }}
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                {dataSource} Active
-              </div>
-
-              {/* Right: send */}
+      </header>
+      <main className="flex-grow flex flex-col items-center justify-center p-8 max-w-7xl mx-auto w-full gap-16">
+        <section className="w-full max-w-3xl flex flex-col items-center text-center space-y-8 mt-12">
+          <h1 className="font-h1 text-h1 text-primary">How can I help you with your medication today?</h1>
+          <div className="relative w-full group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary-container to-secondary-container rounded-[24px] blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+            <div className="relative flex items-center bg-surface-container-lowest rounded-[24px] p-2 shadow-sm border border-[#E2E8F0]">
+              <span className="material-symbols-outlined text-primary-container ml-4" data-icon="temp_preferences_custom">temp_preferences_custom</span>
+              <input
+                className="w-full bg-transparent border-none focus:ring-0 font-body-lg text-body-lg text-on-surface placeholder:text-outline h-[56px] px-4"
+                placeholder="Ask PharmSense AI..."
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+              />
               <button
+                className="bg-primary text-on-primary rounded-xl px-6 py-3 font-button text-button hover:-translate-y-0.5 transition-transform shadow-md ml-2 flex items-center gap-2"
                 onClick={handleSend}
-                disabled={!input.trim() || isLoading}
-                className="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-white transition-all active:scale-95"
-                style={{
-                  background: input.trim() && !isLoading ? token.gradientBtn : 'rgba(255,255,255,0.08)',
-                  boxShadow: input.trim() && !isLoading ? '0 4px 14px rgba(124,58,237,0.4)' : 'none',
-                  cursor: !input.trim() || isLoading ? 'not-allowed' : 'pointer',
-                  opacity: !input.trim() || isLoading ? 0.5 : 1,
-                }}
-                aria-label="Send"
+                disabled={isLoading}
               >
-                {isLoading ? (
-                  <svg className="w-3.5 h-3.5 animate-spin" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
-                  </svg>
-                ) : (
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                )}
-                {isLoading ? 'Thinking…' : 'Send'}
+                <span>{isLoading ? 'Asking...' : 'Ask AI'}</span>
+                <span className="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
               </button>
             </div>
           </div>
-
-          {/* Hint */}
-          <p className="text-center text-[11px] mt-2" style={{ color: '#334155' }}>
-            <kbd className="px-1.5 py-0.5 rounded" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>Enter</kbd>{' '}
-            to send ·{' '}
-            <kbd className="px-1.5 py-0.5 rounded" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>Shift+Enter</kbd>{' '}
-            for new line
-          </p>
+          <p className="font-body-sm text-body-sm text-outline">Powered by advanced clinical intelligence.</p>
+        </section>
+        <section className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6">
+          <a className="bg-surface-container-lowest rounded-[24px] p-8 border border-[#E2E8F0] shadow-[0_4px_20px_rgba(0,62,123,0.04)] hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4 cursor-pointer" href="#">
+            <div className="bg-primary-fixed-dim/20 p-4 rounded-full text-primary-container group-hover:bg-primary-fixed transition-colors">
+              <span className="material-symbols-outlined text-3xl" data-icon="upload_file">upload_file</span>
+            </div>
+            <h3 className="font-h3 text-h3 text-on-surface mt-2">Upload Prescription</h3>
+            <p className="font-body-md text-body-md text-on-surface-variant flex-grow">Quickly scan or upload your new prescriptions for processing.</p>
+            <div className="mt-4 font-label-bold text-label-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
+              START <span className="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+            </div>
+          </a>
+          <a className="bg-surface-container-lowest rounded-[24px] p-8 border border-[#E2E8F0] shadow-[0_4px_20px_rgba(0,62,123,0.04)] hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4 cursor-pointer" href="#">
+            <div className="bg-secondary-fixed-dim/20 p-4 rounded-full text-secondary group-hover:bg-secondary-fixed transition-colors">
+              <span className="material-symbols-outlined text-3xl" data-icon="medical_information">medical_information</span>
+            </div>
+            <h3 className="font-h3 text-h3 text-on-surface mt-2">Consult a Pharmacist</h3>
+            <p className="font-body-md text-body-md text-on-surface-variant flex-grow">Connect with our clinical team for dosage or side-effect inquiries.</p>
+            <div className="mt-4 font-label-bold text-label-bold text-secondary flex items-center gap-1 group-hover:gap-2 transition-all">
+              CONNECT <span className="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+            </div>
+          </a>
+          <a className="bg-surface-container-lowest rounded-[24px] p-8 border border-[#E2E8F0] shadow-[0_4px_20px_rgba(0,62,123,0.04)] hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4 cursor-pointer" href="#">
+            <div className="bg-tertiary-fixed-dim/20 p-4 rounded-full text-tertiary group-hover:bg-tertiary-fixed transition-colors">
+              <span className="material-symbols-outlined text-3xl" data-icon="inventory_2">inventory_2</span>
+            </div>
+            <h3 className="font-h3 text-h3 text-on-surface mt-2">My Regular Orders</h3>
+            <p className="font-body-md text-body-md text-on-surface-variant flex-grow">Manage and track your recurring medication deliveries.</p>
+            <div className="mt-4 font-label-bold text-label-bold text-tertiary flex items-center gap-1 group-hover:gap-2 transition-all">
+              MANAGE <span className="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+            </div>
+          </a>
+        </section>
+        <section className="w-full max-w-4xl text-center space-y-6">
+          <h4 className="font-label-bold text-label-bold text-outline uppercase tracking-widest">Trending Health Topics</h4>
+          <div className="flex flex-wrap justify-center gap-3">
+            <span className="px-6 py-2 bg-surface-container-high text-on-surface-variant font-body-sm text-body-sm rounded-full cursor-pointer hover:bg-surface-variant transition-colors border border-outline-variant/30 shadow-sm">Allergy Season Prep</span>
+            <span className="px-6 py-2 bg-surface-container-high text-on-surface-variant font-body-sm text-body-sm rounded-full cursor-pointer hover:bg-surface-variant transition-colors border border-outline-variant/30 shadow-sm">Managing Hypertension</span>
+            <span className="px-6 py-2 bg-surface-container-high text-on-surface-variant font-body-sm text-body-sm rounded-full cursor-pointer hover:bg-surface-variant transition-colors border border-outline-variant/30 shadow-sm">Vitamin D Supplements</span>
+            <span className="px-6 py-2 bg-surface-container-high text-on-surface-variant font-body-sm text-body-sm rounded-full cursor-pointer hover:bg-surface-variant transition-colors border border-outline-variant/30 shadow-sm">Medication Interactions</span>
+          </div>
+        </section>
+      </main>
+      <footer className="bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 w-full mt-auto">
+        <div className="max-w-7xl mx-auto px-8 py-16 flex flex-col md:flex-row justify-between items-center gap-8 w-full">
+          <div className="font-bold text-slate-900 dark:text-slate-100 font-manrope text-xs uppercase tracking-widest text-slate-400 dark:text-slate-500">
+            © 2024 PharmSense Digital Healthcare. Clinical Excellence Guaranteed.
+          </div>
+          <nav className="flex space-x-6 font-manrope text-xs uppercase tracking-widest">
+            <a className="text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">Terms of Care</a>
+            <a className="text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">Privacy Shield</a>
+            <a className="text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">HIPAA Compliance</a>
+            <a className="text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">Pharmacist Login</a>
+          </nav>
         </div>
-      </div>
-
+      </footer>
     </div>
   )
 }
