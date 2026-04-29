@@ -65,6 +65,7 @@ export default function DashboardPage() {
   const location = useLocation();
 
   const userInitial = (user?.name || user?.email || "?").charAt(0).toUpperCase();
+  const isRTL = ["he", "ar"].includes(i18n.language);
 
   // Reset all state when the logo is clicked (reset token changes)
   useEffect(() => {
@@ -221,7 +222,7 @@ export default function DashboardPage() {
                 local_pharmacy
               </span>
               <input
-                dir={["he", "ar"].includes(i18n.language) ? "rtl" : "ltr"}
+                dir={isRTL ? "rtl" : "ltr"}
                 className="w-full bg-transparent border-none focus:ring-0 font-body-lg text-body-lg text-on-surface placeholder:text-outline dark:placeholder:text-slate-400 h-[56px] outline-none pl-10 sm:pl-12 pr-[140px] sm:pr-[160px]"
                 placeholder={t("dashboard.askPlaceholder")}
                 type="text"
@@ -233,11 +234,11 @@ export default function DashboardPage() {
                 type="submit"
                 disabled={isLoading || !query.trim()}
                 className="absolute inset-y-0 right-3 sm:right-4 my-auto bg-[#003e7b] text-white rounded-xl px-3 sm:px-5 py-2.5 font-button text-button hover:-translate-y-0.5 transition-transform shadow-md flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed h-[42px]"
-                style={{ flexDirection: ["he", "ar"].includes(i18n.language) ? "row-reverse" : "row" }}
+                style={{ flexDirection: isRTL ? "row-reverse" : "row" }}
               >
                 <span className="ask-btn-label hidden sm:inline">{t("dashboard.askBtn")}</span>
                 <span className="material-symbols-outlined text-[20px]">
-                  {["he", "ar"].includes(i18n.language) ? "arrow_back" : "arrow_forward"}
+                  {isRTL ? "arrow_back" : "arrow_forward"}
                 </span>
               </button>
             </div>
