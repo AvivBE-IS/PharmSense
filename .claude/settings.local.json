@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install *)",
+      "Bash(python3 -m pip install motor pymongo)",
+      "Bash(python3 -m venv .venv)",
+      "Bash(.venv/bin/pip install *)",
+      "Bash(SECRET_KEY=test .venv/bin/python -c \"from app.main import app; print\\('OK'\\)\")"
+    ]
+  }
+}
