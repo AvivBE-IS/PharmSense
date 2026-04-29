@@ -19,6 +19,6 @@ async def chat(
     _current_user: dict = Depends(get_current_user),
 ) -> ChatResponse:
     logger.info("[REQUEST] POST /chat — message_length=%d", len(request.message))
-    results = await service.respond(request.message, products)
-    logger.info("[RESPONSE] POST /chat — %d product(s) returned", len(results))
-    return ChatResponse(results=results)
+    response = await service.respond(request.message, products)
+    logger.info("[RESPONSE] POST /chat — %d product(s) returned", len(response.results))
+    return response

@@ -14,15 +14,7 @@ export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  if (location.pathname === "/login") return null;
-
-  function handleLogout() {
-    setDropdownOpen(false);
-    logout();
-    navigate("/login");
-  }
-
-  // Close dropdown when clicking outside
+  // Must be called before any conditional return to satisfy Rules of Hooks
   useEffect(() => {
     function handleClickOutside(e) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -33,6 +25,14 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  if (location.pathname === "/login") return null;
+
+  function handleLogout() {
+    setDropdownOpen(false);
+    logout();
+    navigate("/login");
+  }
+
   const displayName = user?.name || user?.email || "";
   const avatarLetter = displayName.charAt(0).toUpperCase();
 
@@ -40,13 +40,18 @@ export default function Navbar() {
     e.preventDefault();
     // Always navigate to /dashboard with a fresh reset token.
     // DashboardPage listens for this and clears all state.
-    navigate("/dashboard", { state: { reset: Date.now() }, replace: location.pathname === "/dashboard" });
+    navigate("/dashboard", {
+      state: { reset: Date.now() },
+      replace: location.pathname === "/dashboard",
+    });
   }
 
   return (
-    <header dir="ltr" className="bg-surface-container-lowest/90 backdrop-blur-md sticky top-0 z-50 border-b border-outline-variant/30 shadow-[0_20px_40px_-15px_rgba(0,85,165,0.04)] w-full">
+    <header
+      dir="ltr"
+      className="bg-surface-container-lowest/90 backdrop-blur-md sticky top-0 z-50 border-b border-outline-variant/30 shadow-[0_20px_40px_-15px_rgba(0,85,165,0.04)] w-full"
+    >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-8 h-16 sm:h-20 w-full">
-
         {/* Brand — clicking resets dashboard or navigates home from other pages */}
         <a
           href="/dashboard"
@@ -108,7 +113,9 @@ export default function Navbar() {
                     onClick={handleLogout}
                     className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 dark:text-red-400 transition-colors duration-150"
                   >
-                    <span className="material-symbols-outlined text-[20px]">logout</span>
+                    <span className="material-symbols-outlined text-[20px]">
+                      logout
+                    </span>
                     {t("nav.logout")}
                   </button>
                 </div>

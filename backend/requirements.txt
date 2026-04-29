@@ -21,7 +21,7 @@ python-multipart>=0.0.18
 # LangChain
 langchain-core>=0.3
 langchain-community>=0.3
-langchain-openai>=0.2           # used when LLM_PROVIDER=openai
+langchain-openai>=0.2           # used when LLM_PROVIDER=openai, and for Groq fallback (OpenAI-compatible)
 langchain-anthropic>=0.2        # used when LLM_PROVIDER=anthropic
 langchain-google-genai>=2.0     # used when LLM_PROVIDER=gemini
 

@@ -33,7 +33,10 @@ export default function LoginPage() {
 
   return (
     /* Outer wrapper always LTR — prevents the split layout from flipping */
-    <div dir="ltr" className="bg-background text-on-background min-h-screen flex flex-col antialiased">
+    <div
+      dir="ltr"
+      className="bg-background text-on-background min-h-screen flex flex-col antialiased"
+    >
       <div className="flex-grow flex flex-col md:flex-row h-screen">
         {/* Left panel — pharmacist image, shrink-0 prevents reflow */}
         <div className="hidden md:block md:w-1/2 shrink-0 relative bg-surface-container-high overflow-hidden rounded-r-[32px] ambient-shadow z-10">
@@ -53,9 +56,15 @@ export default function LoginPage() {
         </div>
 
         {/* Right panel — login form; dir scoped here so text/icons follow language */}
-        <div dir={dir} className="w-full md:w-1/2 flex items-center justify-center p-6 sm:p-12 bg-background relative z-0">
+        <div
+          dir={dir}
+          className="w-full md:w-1/2 flex items-center justify-center p-6 sm:p-12 bg-background relative z-0"
+        >
           {/* Logo — always top-left regardless of language */}
-          <div dir="ltr" className="absolute top-8 start-8 flex items-center gap-2">
+          <div
+            dir="ltr"
+            className="absolute top-8 start-8 flex items-center gap-2"
+          >
             <span
               className="material-symbols-outlined text-primary-container text-3xl"
               style={{ fontVariationSettings: '"FILL" 1' }}
@@ -74,7 +83,9 @@ export default function LoginPage() {
           {/* Card */}
           <div className="w-full max-w-md bg-surface-container-lowest rounded-[24px] p-8 sm:p-10 ambient-shadow border border-outline-variant/30">
             <div className="mb-10 text-center">
-              <h2 className="font-h2 text-h2 text-on-surface mb-2">{t("login.welcome")}</h2>
+              <h2 className="font-h2 text-h2 text-on-surface mb-2">
+                {t("login.welcome")}
+              </h2>
               <p className="font-body-md text-body-md text-on-surface-variant">
                 {t("login.subtitle")}
               </p>
@@ -164,7 +175,9 @@ export default function LoginPage() {
                   type="submit"
                   disabled={isSubmitting}
                 >
-                  <span>{isSubmitting ? t("login.loggingIn") : t("login.loginBtn")}</span>
+                  <span>
+                    {isSubmitting ? t("login.loggingIn") : t("login.loginBtn")}
+                  </span>
                   {!isSubmitting && (
                     <span className="material-symbols-outlined text-sm">
                       arrow_forward
@@ -173,8 +186,6 @@ export default function LoginPage() {
                 </button>
               </div>
             </form>
-
-
 
             <p className="mt-8 text-center font-body-sm text-body-sm text-on-surface-variant">
               {t("login.noAccount")}{" "}
