@@ -44,5 +44,8 @@
     "trending3": "אינטראקציות תרופתיות",
     "aiError": "לא הצלחתי לעבד את הבקשה.",
     "networkError": "מצטערים, לא ניתן להגיע לעוזר ה-AI. אנא נסה שוב."
+  },
+  "footer": {
+    "copyright": "© כל הזכויות שמורות ל-PharmSense Digital Healthcare 2026."
   }
 }

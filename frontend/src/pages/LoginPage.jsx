@@ -54,8 +54,8 @@ export default function LoginPage() {
 
         {/* Right panel — login form; dir scoped here so text/icons follow language */}
         <div dir={dir} className="w-full md:w-1/2 flex items-center justify-center p-6 sm:p-12 bg-background relative z-0">
-          {/* Logo — always top-start (left in LTR, right in RTL) */}
-          <div className="absolute top-8 start-8 flex items-center gap-2">
+          {/* Logo — always top-left regardless of language */}
+          <div dir="ltr" className="absolute top-8 start-8 flex items-center gap-2">
             <span
               className="material-symbols-outlined text-primary-container text-3xl"
               style={{ fontVariationSettings: '"FILL" 1' }}
@@ -66,8 +66,8 @@ export default function LoginPage() {
               PharmSense
             </span>
           </div>
-          {/* Switcher — always top-end */}
-          <div className="absolute top-8 end-8">
+          {/* Switcher — always top-right regardless of language */}
+          <div dir="ltr" className="absolute top-8 end-8">
             <LanguageSwitcher />
           </div>
 

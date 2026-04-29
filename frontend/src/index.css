@@ -3,49 +3,262 @@
 @tailwind components;
 @tailwind utilities;
 
-.ambient-shadow {
-  box-shadow:
-    0 10px 20px -5px rgba(0, 85, 165, 0.04),
-    0 8px 16px -8px rgba(0, 85, 165, 0.04);
+/* ─── Light mode design tokens (RGB channels for opacity support) ─── */
+:root {
+  --color-background:                249 249 255;
+  --color-surface:                   249 249 255;
+  --color-surface-bright:            249 249 255;
+  --color-surface-dim:               207 218 242;
+  --color-surface-container-lowest:  255 255 255;
+  --color-surface-container-low:     240 243 255;
+  --color-surface-container:         231 238 255;
+  --color-surface-container-high:    222 232 255;
+  --color-surface-container-highest: 216 227 251;
+  --color-surface-variant:           216 227 251;
+  --color-surface-tint:              23 94 174;
+  --color-on-background:             17 28 45;
+  --color-on-surface:                17 28 45;
+  --color-on-surface-variant:        66 71 81;
+  --color-outline:                   114 119 131;
+  --color-outline-variant:           194 198 211;
+  --color-primary:                   0 62 123;
+  --color-on-primary:                255 255 255;
+  --color-primary-container:         0 85 165;
+  --color-on-primary-container:      176 204 255;
+  --color-primary-fixed:             214 227 255;
+  --color-primary-fixed-dim:         168 200 255;
+  --color-on-primary-fixed:          0 27 60;
+  --color-on-primary-fixed-variant:  0 70 138;
+  --color-inverse-primary:           168 200 255;
+  --color-inverse-surface:           38 49 67;
+  --color-inverse-on-surface:        236 241 255;
+  --color-secondary:                 0 106 106;
+  --color-on-secondary:              255 255 255;
+  --color-secondary-container:       144 239 239;
+  --color-on-secondary-container:    0 110 110;
+  --color-secondary-fixed:           147 242 242;
+  --color-secondary-fixed-dim:       118 214 213;
+  --color-on-secondary-fixed:        0 32 32;
+  --color-on-secondary-fixed-variant:0 79 79;
+  --color-tertiary:                  60 63 65;
+  --color-on-tertiary:               255 255 255;
+  --color-tertiary-container:        83 86 88;
+  --color-on-tertiary-container:     201 203 205;
+  --color-tertiary-fixed:            224 227 229;
+  --color-tertiary-fixed-dim:        196 199 201;
+  --color-on-tertiary-fixed:         25 28 30;
+  --color-on-tertiary-fixed-variant: 68 71 73;
+  --color-error:                     186 26 26;
+  --color-on-error:                  255 255 255;
+  --color-error-container:           255 218 214;
+  --color-on-error-container:        147 0 10;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* ─── Dark mode overrides ──────────────────────────────────────────── */
+.dark {
+  --color-background:                13 27 46;
+  --color-surface:                   13 27 46;
+  --color-surface-bright:            21 34 54;
+  --color-surface-dim:               8 15 26;
+  --color-surface-container-lowest:  17 29 48;
+  --color-surface-container-low:     21 34 54;
+  --color-surface-container:         26 42 64;
+  --color-surface-container-high:    31 49 80;
+  --color-surface-container-highest: 37 58 92;
+  --color-surface-variant:           31 45 68;
+  --color-surface-tint:              91 155 213;
+  --color-on-background:             205 216 240;
+  --color-on-surface:                205 216 240;
+  --color-on-surface-variant:        122 138 171;
+  --color-outline:                   74 85 104;
+  --color-outline-variant:           45 58 82;
+  --color-primary:                   91 155 213;
+  --color-on-primary:                0 27 60;
+  --color-primary-container:         29 74 138;
+  --color-on-primary-container:      168 200 255;
+  --color-primary-fixed:             29 58 110;
+  --color-primary-fixed-dim:         91 155 213;
+  --color-on-primary-fixed:          214 227 255;
+  --color-on-primary-fixed-variant:  168 200 255;
+  --color-inverse-primary:           0 62 123;
+  --color-inverse-surface:           205 216 240;
+  --color-inverse-on-surface:        38 49 67;
+  --color-secondary:                 77 217 217;
+  --color-on-secondary:              0 32 32;
+  --color-secondary-container:       0 79 79;
+  --color-on-secondary-container:    144 239 239;
+  --color-secondary-fixed:           0 79 79;
+  --color-secondary-fixed-dim:       77 217 217;
+  --color-on-secondary-fixed:        144 239 239;
+  --color-on-secondary-fixed-variant:118 214 213;
+  --color-tertiary:                  176 180 184;
+  --color-on-tertiary:               28 31 33;
+  --color-tertiary-container:        45 48 51;
+  --color-on-tertiary-container:     224 227 229;
+  --color-tertiary-fixed:            42 45 48;
+  --color-tertiary-fixed-dim:        176 180 184;
+  --color-on-tertiary-fixed:         224 227 229;
+  --color-on-tertiary-fixed-variant: 138 141 144;
+  --color-error:                     255 180 171;
+  --color-on-error:                  105 0 5;
+  --color-error-container:           147 0 10;
+  --color-on-error-container:        255 218 214;
+}
+
+/* ─── Page gradient (switches in dark mode) ───────────────────────── */
+.page-gradient {
+  background: linear-gradient(135deg, #f0f4ff 0%, #f8fafc 50%, #eef6ff 100%);
+}
+.dark .page-gradient {
+  background: linear-gradient(135deg, #091525 0%, #0d1b2e 50%, #0a1a2e 100%);
+}
+
+/* ─── Pinned input bar fade (switches in dark mode) ───────────────── */
+.input-bar-fade {
+  background: linear-gradient(to top, rgb(240 244 255 / 0.97), rgb(240 244 255 / 0.75), transparent);
+}
+/* Dark: fully solid so text is always readable over the dark bg */
+.dark .input-bar-fade {
+  background: rgb(17 29 48);   /* --color-surface-container-lowest dark */
+}
+
+/* ─── Ambient shadow ──────────────────────────────────────────────── */
+.ambient-shadow {
+  box-shadow: 0 10px 20px -5px rgba(0,85,165,0.04), 0 8px 16px -8px rgba(0,85,165,0.04);
+}
+.dark .ambient-shadow {
+  box-shadow: 0 10px 20px -5px rgba(0,0,0,0.25), 0 8px 16px -8px rgba(0,0,0,0.2);
+}
+
+/* ─── Base reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Enforce Heebo everywhere — including native form controls */
+*, *::before, *::after {
+  font-family: inherit;
+}
+input, textarea, select, button {
+  font-family: 'Heebo', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ─── Dropdown fade-in animation ─────────────────────────────────── */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 body {
   margin: 0;
-  font-family:
-    "Inter",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    "Helvetica Neue",
-    sans-serif;
-  background: #f9f9ff;
-  color: #111c2d;
+  /* Heebo covers Hebrew + Latin; Inter/Manrope as Latin fallbacks */
+  font-family: 'Heebo', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-on-background));
   -webkit-font-smoothing: antialiased;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* ─── Dark mode: standardize all prose text to off-white ─────────── */
+/* Applies only where no explicit text-* class overrides it */
+.dark h1:not([class*="text-"]),
+.dark h2:not([class*="text-"]),
+.dark h3:not([class*="text-"]),
+.dark h4:not([class*="text-"]),
+.dark h5:not([class*="text-"]),
+.dark h6:not([class*="text-"]),
+.dark p:not([class*="text-"]),
+.dark span:not([class*="text-"]),
+.dark label:not([class*="text-"]) {
+  color: rgb(var(--color-on-surface)); /* 205 216 240 — clean off-white */
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+a { color: inherit; text-decoration: none; }
+
+/* ─── Scrollbar ───────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 85, 165, 0.25);
+  background: rgb(var(--color-primary) / 0.25);
   border-radius: 99px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 85, 165, 0.45);
+  background: rgb(var(--color-primary) / 0.45);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   RESPONSIVE MEDIA QUERIES
+   Breakpoints mirror Tailwind: sm 640 | md 768 | lg 1024 | xl 1280
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Mobile — < 640px ──────────────────────────────────────────── */
+@media (max-width: 639px) {
+  /* Navbar: tighter padding, smaller logo */
+  header .max-w-7xl {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: 56px;
+  }
+
+  /* Hide logout label on very small screens — keep icon */
+  .nav-logout-label { display: none; }
+
+  /* Hero heading: scale down */
+  .font-h1.text-h1 {
+    font-size: 28px;
+    line-height: 1.25;
+  }
+
+  /* Input bar: full width, smaller padding */
+  .input-bar-fade {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-bottom: 1.25rem;
+  }
+
+  /* Input inner row: tighter */
+  .input-bar-fade form > div > div > div {
+    padding: 0.75rem 1rem;
+  }
+
+  /* Ask button: hide label, show icon only */
+  .ask-btn-label { display: none; }
+  .ask-btn-icon  { display: inline-flex; }
+
+  /* Chips row: left-aligned with horizontal scroll */
+  .chips-row {
+    justify-content: flex-start !important;
+    padding-left: 0.25rem;
+  }
+}
+
+/* ─── Tablet — 640px–1023px ─────────────────────────────────────── */
+@media (min-width: 640px) and (max-width: 1023px) {
+  header .max-w-7xl {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .font-h1.text-h1 {
+    font-size: 32px;
+  }
+
+  /* Input bar: 95% width on tablet */
+  .input-bar-fade form {
+    width: 95% !important;
+  }
+
+  .chips-row {
+    justify-content: center;
+  }
+}
+
+/* ─── Desktop — ≥ 1024px ────────────────────────────────────────── */
+@media (min-width: 1024px) {
+  .ask-btn-label { display: inline; }
+  .ask-btn-icon  { display: inline-flex; }
+}
+
+/* ─── Large desktop — ≥ 1280px ──────────────────────────────────── */
+@media (min-width: 1280px) {
+  .font-h1.text-h1 {
+    font-size: 44px;
+  }
 }
