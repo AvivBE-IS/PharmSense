@@ -1,0 +1,48 @@
+{
+  "login": {
+    "tagline": "Empathetic Care,\nClinical Precision.",
+    "taglineSub": "with PharmSense your health managed with efficiency and trust in a modern digital environment.",
+    "welcome": "WELCOME",
+    "subtitle": "Log in to manage your prescriptions.",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "patient@example.com",
+    "passwordLabel": "Password",
+    "forgotPassword": "Forgot Password?",
+    "loginBtn": "Login",
+    "loggingIn": "Logging in…",
+    "or": "Or",
+    "bioId": "Login with Bio-ID",
+    "noAccount": "Don't have an account?",
+    "register": "Register",
+    "loginFailed": "Login failed. Please try again."
+  },
+  "nav": {
+    "prescriptions": "Prescriptions",
+    "refills": "Refills",
+    "pharmacyFinder": "Pharmacy Finder",
+    "healthAI": "Health AI",
+    "logout": "Log out"
+  },
+  "dashboard": {
+    "heroTitle": "How can I help you with your medication today?",
+    "askPlaceholder": "Ask PharmSense AI...",
+    "askBtn": "Ask AI",
+    "poweredBy": "Powered by advanced clinical intelligence.",
+    "uploadTitle": "Upload Prescription",
+    "uploadDesc": "Quickly scan or upload your new prescriptions for processing.",
+    "uploadCta": "START",
+    "consultTitle": "Consult a Pharmacist",
+    "consultDesc": "Connect with our clinical team for dosage or side-effect inquiries.",
+    "consultCta": "CONNECT",
+    "ordersTitle": "My Regular Orders",
+    "ordersDesc": "Manage and track your recurring medication deliveries.",
+    "ordersCta": "TRACK",
+    "trendingTitle": "Trending Health Topics",
+    "trending0": "Allergy Season Prep",
+    "trending1": "Managing Hypertension",
+    "trending2": "Vitamin D Supplements",
+    "trending3": "Medication Interactions",
+    "aiError": "I could not process that request.",
+    "networkError": "Sorry, I could not reach the AI assistant. Please try again."
+  }
+}

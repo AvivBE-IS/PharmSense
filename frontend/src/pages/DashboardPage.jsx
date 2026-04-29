@@ -1,12 +1,6 @@
 ﻿import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { sendMessage } from "../api/chatApi";
-
-const TRENDING = [
-  "Allergy Season Prep",
-  "Managing Hypertension",
-  "Vitamin D Supplements",
-  "Medication Interactions",
-];
 
 function MessageBubble({ message }) {
   const isUser = message.role === "user";
@@ -62,6 +56,7 @@ export default function DashboardPage() {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -81,7 +76,7 @@ export default function DashboardPage() {
         {
           role: "assistant",
           content:
-            data.reply || data.answer || "I could not process that request.",
+            data.reply || data.answer || t("dashboard.aiError"),
           sources: data.sources || [],
         },
       ]);
@@ -91,7 +86,7 @@ export default function DashboardPage() {
         {
           role: "assistant",
           content:
-            "Sorry, I could not reach the AI assistant. Please try again.",
+            t("dashboard.networkError"),
           sources: [],
         },
       ]);
@@ -151,7 +146,7 @@ export default function DashboardPage() {
         {!hasMessages && (
           <section className="w-full max-w-3xl flex flex-col items-center text-center mt-12">
             <h1 className="font-h1 text-h1 text-primary">
-              How can I help you with your medication today?
+              {t("dashboard.heroTitle")}
             </h1>
           </section>
         )}
@@ -167,7 +162,7 @@ export default function DashboardPage() {
                 </span>
                 <input
                   className="w-full bg-transparent border-none focus:ring-0 font-body-lg text-body-lg text-on-surface placeholder:text-outline h-[56px] px-4 outline-none"
-                  placeholder="Ask PharmSense AI..."
+                  placeholder={t("dashboard.askPlaceholder")}
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
@@ -178,7 +173,7 @@ export default function DashboardPage() {
                   disabled={isLoading || !query.trim()}
                   className="bg-primary text-on-primary rounded-xl px-6 py-3 font-button text-button hover:-translate-y-0.5 transition-transform shadow-md ml-2 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <span>Ask AI</span>
+                  <span>{t("dashboard.askBtn")}</span>
                   <span className="material-symbols-outlined text-[20px]">
                     arrow_forward
                   </span>
@@ -188,7 +183,7 @@ export default function DashboardPage() {
           </form>
           {!hasMessages && (
             <p className="text-center mt-4 font-body-sm text-body-sm text-outline">
-              Powered by advanced clinical intelligence.
+              {t("dashboard.poweredBy")}
             </p>
           )}
         </section>
@@ -206,13 +201,13 @@ export default function DashboardPage() {
                 </span>
               </div>
               <h3 className="font-h3 text-h3 text-on-surface mt-2">
-                Upload Prescription
+                {t("dashboard.uploadTitle")}
               </h3>
               <p className="font-body-md text-body-md text-on-surface-variant flex-grow">
-                Quickly scan or upload your new prescriptions for processing.
+                {t("dashboard.uploadDesc")}
               </p>
               <div className="mt-4 font-label-bold text-label-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
-                START
+                {t("dashboard.uploadCta")}
                 <span className="material-symbols-outlined text-[16px]">
                   chevron_right
                 </span>
@@ -229,14 +224,13 @@ export default function DashboardPage() {
                 </span>
               </div>
               <h3 className="font-h3 text-h3 text-on-surface mt-2">
-                Consult a Pharmacist
+                {t("dashboard.consultTitle")}
               </h3>
               <p className="font-body-md text-body-md text-on-surface-variant flex-grow">
-                Connect with our clinical team for dosage or side-effect
-                inquiries.
+                {t("dashboard.consultDesc")}
               </p>
               <div className="mt-4 font-label-bold text-label-bold text-secondary flex items-center gap-1 group-hover:gap-2 transition-all">
-                CONNECT
+                {t("dashboard.consultCta")}
                 <span className="material-symbols-outlined text-[16px]">
                   chevron_right
                 </span>
@@ -253,13 +247,13 @@ export default function DashboardPage() {
                 </span>
               </div>
               <h3 className="font-h3 text-h3 text-on-surface mt-2">
-                My Regular Orders
+                {t("dashboard.ordersTitle")}
               </h3>
               <p className="font-body-md text-body-md text-on-surface-variant flex-grow">
-                Manage and track your recurring medication deliveries.
+                {t("dashboard.ordersDesc")}
               </p>
               <div className="mt-4 font-label-bold text-label-bold text-tertiary flex items-center gap-1 group-hover:gap-2 transition-all">
-                MANAGE
+                {t("dashboard.ordersCta")}
                 <span className="material-symbols-outlined text-[16px]">
                   chevron_right
                 </span>
@@ -272,16 +266,16 @@ export default function DashboardPage() {
         {!hasMessages && (
           <section className="w-full max-w-4xl text-center space-y-6">
             <h4 className="font-label-bold text-label-bold text-outline uppercase tracking-widest">
-              Trending Health Topics
+              {t("dashboard.trendingTitle")}
             </h4>
             <div className="flex flex-wrap justify-center gap-3">
-              {TRENDING.map((topic) => (
+              {[0, 1, 2, 3].map((i) => (
                 <span
-                  key={topic}
+                  key={i}
                   className="px-6 py-2 bg-surface-container-high text-on-surface-variant font-body-sm text-body-sm rounded-full cursor-pointer hover:bg-surface-variant transition-colors border border-outline-variant/30 shadow-sm"
-                  onClick={() => setQuery(topic)}
+                  onClick={() => setQuery(t(`dashboard.trending${i}`))}
                 >
-                  {topic}
+                  {t(`dashboard.trending${i}`)}
                 </span>
               ))}
             </div>

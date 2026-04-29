@@ -1,0 +1,48 @@
+{
+  "login": {
+    "tagline": "טיפול אמפתי,\nדיוק קליני.",
+    "taglineSub": "עם PharmSense הבריאות שלך מנוהלת ביעילות ובאמון בסביבה דיגיטלית מודרנית.",
+    "welcome": "ברוכים הבאים",
+    "subtitle": "התחבר לניהול המרשמים שלך.",
+    "emailLabel": "כתובת אימייל",
+    "emailPlaceholder": "patient@example.com",
+    "passwordLabel": "סיסמה",
+    "forgotPassword": "שכחת סיסמה?",
+    "loginBtn": "כניסה",
+    "loggingIn": "מתחבר…",
+    "or": "או",
+    "bioId": "כניסה עם Bio-ID",
+    "noAccount": "אין לך חשבון?",
+    "register": "הרשמה",
+    "loginFailed": "הכניסה נכשלה. אנא נסה שוב."
+  },
+  "nav": {
+    "prescriptions": "מרשמים",
+    "refills": "מילויים חוזרים",
+    "pharmacyFinder": "מציאת בית מרקחת",
+    "healthAI": "AI בריאות",
+    "logout": "התנתקות"
+  },
+  "dashboard": {
+    "heroTitle": "במה אוכל לעזור לך עם התרופות שלך היום?",
+    "askPlaceholder": "שאל את PharmSense AI...",
+    "askBtn": "שאל AI",
+    "poweredBy": "מופעל על ידי אינטליגנציה קלינית מתקדמת.",
+    "uploadTitle": "העלאת מרשם",
+    "uploadDesc": "סרוק או העלה בקלות מרשמים חדשים לעיבוד.",
+    "uploadCta": "התחל",
+    "consultTitle": "התייעצות עם פרמקולוג",
+    "consultDesc": "התחבר לצוות הקליני שלנו לשאלות על מינון או תופעות לוואי.",
+    "consultCta": "התחבר",
+    "ordersTitle": "ההזמנות הקבועות שלי",
+    "ordersDesc": "נהל ועקוב אחר משלוחי התרופות החוזרים שלך.",
+    "ordersCta": "מעקב",
+    "trendingTitle": "נושאי בריאות פופולריים",
+    "trending0": "הכנה לעונת האלרגיות",
+    "trending1": "ניהול יתר לחץ דם",
+    "trending2": "תוספי ויטמין D",
+    "trending3": "אינטראקציות תרופתיות",
+    "aiError": "לא הצלחתי לעבד את הבקשה.",
+    "networkError": "מצטערים, לא ניתן להגיע לעוזר ה-AI. אנא נסה שוב."
+  }
+}

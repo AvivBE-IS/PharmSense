@@ -1,0 +1,48 @@
+{
+  "login": {
+    "tagline": "رعاية متعاطفة،\nدقة سريرية.",
+    "taglineSub": "مع PharmSense تُدار صحتك بكفاءة وثقة في بيئة رقمية حديثة.",
+    "welcome": "أهلاً وسهلاً",
+    "subtitle": "سجّل الدخول لإدارة وصفاتك الطبية.",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "patient@example.com",
+    "passwordLabel": "كلمة المرور",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "loginBtn": "تسجيل الدخول",
+    "loggingIn": "جارٍ تسجيل الدخول…",
+    "or": "أو",
+    "bioId": "الدخول بـ Bio-ID",
+    "noAccount": "ليس لديك حساب؟",
+    "register": "سجّل الآن",
+    "loginFailed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى."
+  },
+  "nav": {
+    "prescriptions": "الوصفات",
+    "refills": "إعادة الشراء",
+    "pharmacyFinder": "البحث عن صيدلية",
+    "healthAI": "الذكاء الصحي",
+    "logout": "تسجيل الخروج"
+  },
+  "dashboard": {
+    "heroTitle": "كيف يمكنني مساعدتك في أدويتك اليوم؟",
+    "askPlaceholder": "اسأل PharmSense AI...",
+    "askBtn": "اسأل AI",
+    "poweredBy": "مدعوم بذكاء سريري متقدم.",
+    "uploadTitle": "رفع الوصفة الطبية",
+    "uploadDesc": "امسح ضوئياً أو ارفع وصفاتك الطبية الجديدة للمعالجة.",
+    "uploadCta": "ابدأ",
+    "consultTitle": "استشارة صيدلاني",
+    "consultDesc": "تواصل مع فريقنا السريري للاستفسار عن الجرعات أو الآثار الجانبية.",
+    "consultCta": "تواصل",
+    "ordersTitle": "طلباتي المعتادة",
+    "ordersDesc": "أدِر وتتبّع توصيلات أدويتك المتكررة.",
+    "ordersCta": "تتبّع",
+    "trendingTitle": "مواضيع صحية رائجة",
+    "trending0": "الاستعداد لموسم الحساسية",
+    "trending1": "إدارة ارتفاع ضغط الدم",
+    "trending2": "مكملات فيتامين D",
+    "trending3": "تفاعلات الأدوية",
+    "aiError": "تعذّر معالجة طلبك.",
+    "networkError": "عذراً، تعذّر الوصول إلى المساعد الذكي. يرجى المحاولة مرة أخرى."
+  }
+}

@@ -1,10 +1,13 @@
 ﻿import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth";
+import LanguageSwitcher from "../components/LanguageSwitcher";
 
 export default function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +24,7 @@ export default function LoginPage() {
       navigate("/dashboard");
     } catch (err) {
       const detail = err?.response?.data?.detail;
-      setError(detail || "Login failed. Please try again.");
+      setError(detail || t("login.loginFailed"));
     } finally {
       setIsSubmitting(false);
     }
@@ -38,14 +41,11 @@ export default function LoginPage() {
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdmxEdwqAeTTDNdU0vwzZCB-vGbwuh7DY-oMZzHLkB121p2eEsuJCuFsUn4U4aHYZrsG6dOG_x7Z2yQoNt2PYGAXqLydY0K7UoONahiv6luXiBRZ91DgW-7iYZAW3t5SFKufdoM-5ATpx6SypqzLcw2ENp63s2VKlNffrREqSaJ0QPE3owTerQMqDT9M3Tx4d8qWfJlOZIcWl_RTpzGZw8Y-zjZXaYbMJkSjTprrM-c6zVkyBHmubiMNwKcbA69nqwA4U7JUHvnxU"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent flex flex-col justify-end p-12">
-            <h1 className="font-h1 text-h1 text-on-primary mb-4">
-              Empathetic Care,
-              <br />
-              Clinical Precision.
+            <h1 className="font-h1 text-h1 text-on-primary mb-4 whitespace-pre-line">
+              {t("login.tagline")}
             </h1>
             <p className="font-body-lg text-body-lg text-inverse-primary max-w-md">
-              with pharmsense your health managed with efficiency and trust in a
-              modern digital environment.
+              {t("login.taglineSub")}
             </p>
           </div>
         </div>
@@ -64,13 +64,16 @@ export default function LoginPage() {
               PharmSense
             </span>
           </div>
+          <div className="absolute top-8 right-8">
+            <LanguageSwitcher />
+          </div>
 
           {/* Card */}
           <div className="w-full max-w-md bg-surface-container-lowest rounded-[24px] p-8 sm:p-10 ambient-shadow border border-outline-variant/30">
             <div className="mb-10 text-center">
-              <h2 className="font-h2 text-h2 text-on-surface mb-2">WELCOME</h2>
+              <h2 className="font-h2 text-h2 text-on-surface mb-2">{t("login.welcome")}</h2>
               <p className="font-body-md text-body-md text-on-surface-variant">
-                Log in to manage your prescriptions.
+                {t("login.subtitle")}
               </p>
             </div>
 
@@ -87,16 +90,16 @@ export default function LoginPage() {
                   className="font-label-bold text-label-bold text-on-surface-variant block mb-2 uppercase"
                   htmlFor="email"
                 >
-                  Email Address
+                  {t("login.emailLabel")}
                 </label>
                 <div className="relative">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline select-none">
+                  <span className="material-symbols-outlined absolute start-4 top-1/2 -translate-y-1/2 text-outline select-none">
                     mail
                   </span>
                   <input
-                    className="w-full h-[56px] pl-12 pr-4 bg-surface rounded-[16px] border border-outline-variant focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 text-on-surface font-body-md text-body-md transition-all outline-none"
+                    className="w-full h-[56px] ps-12 pe-4 bg-surface rounded-[16px] border border-outline-variant focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 text-on-surface font-body-md text-body-md transition-all outline-none"
                     id="email"
-                    placeholder="patient@example.com"
+                    placeholder={t("login.emailPlaceholder")}
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -113,21 +116,21 @@ export default function LoginPage() {
                     className="font-label-bold text-label-bold text-on-surface-variant uppercase"
                     htmlFor="password"
                   >
-                    Password
+                    {t("login.passwordLabel")}
                   </label>
                   <a
                     className="font-body-sm text-body-sm text-primary-container hover:underline transition-all"
                     href="#"
                   >
-                    Forgot Password?
+                    {t("login.forgotPassword")}
                   </a>
                 </div>
                 <div className="relative">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline select-none">
+                  <span className="material-symbols-outlined absolute start-4 top-1/2 -translate-y-1/2 text-outline select-none">
                     lock
                   </span>
                   <input
-                    className="w-full h-[56px] pl-12 pr-12 bg-surface rounded-[16px] border border-outline-variant focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 text-on-surface font-body-md text-body-md transition-all outline-none"
+                    className="w-full h-[56px] ps-12 pe-12 bg-surface rounded-[16px] border border-outline-variant focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 text-on-surface font-body-md text-body-md transition-all outline-none"
                     id="password"
                     placeholder="••••••••"
                     type={showPassword ? "text" : "password"}
@@ -136,7 +139,7 @@ export default function LoginPage() {
                     required
                   />
                   <button
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors"
+                    className="absolute end-4 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors"
                     type="button"
                     onClick={() => setShowPassword((v) => !v)}
                     tabIndex={-1}
@@ -158,7 +161,7 @@ export default function LoginPage() {
                   type="submit"
                   disabled={isSubmitting}
                 >
-                  <span>{isSubmitting ? "Logging in…" : "Login"}</span>
+                  <span>{isSubmitting ? t("login.loggingIn") : t("login.loginBtn")}</span>
                   {!isSubmitting && (
                     <span className="material-symbols-outlined text-sm">
                       arrow_forward
@@ -191,18 +194,18 @@ export default function LoginPage() {
                   >
                     fingerprint
                   </span>
-                  <span>Login with Bio-ID</span>
+                  <span>{t("login.bioId")}</span>
                 </button>
               </div>
             </div>
 
             <p className="mt-8 text-center font-body-sm text-body-sm text-on-surface-variant">
-              Don&apos;t have an account?{" "}
+              {t("login.noAccount")}{" "}
               <a
                 className="text-primary-container font-semibold hover:underline"
                 href="#"
               >
-                Register
+                {t("login.register")}
               </a>
             </p>
           </div>
