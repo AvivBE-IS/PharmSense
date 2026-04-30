@@ -17,9 +17,4 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     results: List[ProductOut]
-    corrected_name: Optional[str] = None
-    symptom: Optional[str] = None
-    target_audience: Optional[str] = None
-    urgency: Optional[str] = None
-    brief_insight: Optional[str] = None
-    language: Optional[str] = None
+    message: Optional[str] = None

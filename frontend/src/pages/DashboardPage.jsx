@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { sendMessage } from "../api/chatApi";
 import SearchResultCard from "../components/SearchResultCard";
+import ProductModal from "../components/ProductModal";
 
 // ─── Extracted at module level to avoid remount on every render ───────────────
 function SearchBar({
@@ -119,6 +120,7 @@ export default function DashboardPage() {
   const [intent, setIntent] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [searchError, setSearchError] = useState(null);
+  const [modalProductId, setModalProductId] = useState(null);
 
   const { t, i18n } = useTranslation();
   const location = useLocation();
@@ -264,6 +266,9 @@ export default function DashboardPage() {
   // ── RESULTS VIEW (after search) ────────────────────────────────────────────
   return (
     <div className="page-gradient text-on-background min-h-screen flex flex-col antialiased">
+      {modalProductId && (
+        <ProductModal productId={modalProductId} onClose={() => setModalProductId(null)} />
+      )}
       {/* Sticky search bar at top */}
       <div className="sticky top-0 z-20 bg-surface/90 backdrop-blur-md border-b border-outline-variant/20 px-4 py-3 shadow-sm">
         <SearchBar {...searchBarProps} />
@@ -310,9 +315,7 @@ export default function DashboardPage() {
               <SearchResultCard
                 key={product.id}
                 {...product}
-                onViewDetails={() => {
-                  /* TODO: navigate(`/medicine/${product.id}`) */
-                }}
+                onViewDetails={() => setModalProductId(product.id)}
               />
             ))}
           </div>

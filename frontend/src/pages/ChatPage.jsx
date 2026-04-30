@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { sendMessage } from "../api/chatApi";
+import SearchResultCard from "../components/SearchResultCard";
+import ProductModal from "../components/ProductModal";
 
-function MessageBubble({ message }) {
+function MessageBubble({ message, onViewDetails }) {
   const isUser = message.role === "user";
 
   return (
@@ -12,7 +14,8 @@ function MessageBubble({ message }) {
         </div>
       )}
 
-      <div className={`max-w-[72%] ${isUser ? "items-end" : "items-start"} flex flex-col`}>
+      <div className={`${isUser ? "items-end max-w-[72%]" : "items-start w-full max-w-2xl"} flex flex-col`}>
+        {/* Text bubble */}
         <div
           className={`rounded-2xl px-4 py-3 shadow-sm text-sm leading-relaxed whitespace-pre-wrap ${
             isUser
@@ -22,6 +25,20 @@ function MessageBubble({ message }) {
         >
           {message.content}
         </div>
+
+        {/* Product cards */}
+        {message.products?.length > 0 && (
+          <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
+            {message.products.map((product) => (
+              <SearchResultCard
+                key={product.id}
+                {...product}
+                onViewDetails={() => onViewDetails(product.id)}
+              />
+            ))}
+          </div>
+        )}
+
         <span className="text-[10px] text-slate-400 mt-1 px-1">{message.timestamp}</span>
       </div>
 
@@ -58,7 +75,8 @@ function now() {
 const WELCOME_MESSAGE = {
   id: 0,
   role: "assistant",
-  content: "Hello! I'm your PharmSense AI assistant.\n\nType a medication name and I'll find it for you.",
+  content: "Hello! I'm your PharmSense AI assistant.\n\nDescribe a medication name or your symptoms and I'll find relevant products for you.",
+  products: [],
   timestamp: now(),
 };
 
@@ -67,6 +85,7 @@ export default function ChatPage() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [modalProductId, setModalProductId] = useState(null);
 
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -83,8 +102,7 @@ export default function ChatPage() {
     const text = input.trim();
     if (!text || isLoading) return;
 
-    const userMsg = { id: Date.now(), role: "user", content: text, timestamp: now() };
-    setMessages((prev) => [...prev, userMsg]);
+    setMessages((prev) => [...prev, { id: Date.now(), role: "user", content: text, products: [], timestamp: now() }]);
     setInput("");
     setIsLoading(true);
     setError(null);
@@ -92,17 +110,17 @@ export default function ChatPage() {
     try {
       const response = await sendMessage(text);
       const results = response.results ?? [];
+      const message = response.message;
 
-      const content =
-        results.length > 0
-          ? `Found ${results.length} medication(s):\n${results
-              .map((p) => `• ${p.name_en} ${p.dosage_strength} (${p.brand})`)
-              .join("\n")}`
+      const content = message
+        ? message
+        : results.length > 0
+          ? `Found ${results.length} medication${results.length !== 1 ? "s" : ""}:`
           : "No medications found for your search.";
 
       setMessages((prev) => [
         ...prev,
-        { id: Date.now() + 1, role: "assistant", content, timestamp: now() },
+        { id: Date.now() + 1, role: "assistant", content, products: results, timestamp: now() },
       ]);
     } catch {
       setError("Failed to reach the assistant. Please try again.");
@@ -121,11 +139,14 @@ export default function ChatPage() {
 
   return (
     <div className="flex flex-col h-screen bg-slate-100">
+      {modalProductId && (
+        <ProductModal productId={modalProductId} onClose={() => setModalProductId(null)} />
+      )}
       {/* Header */}
       <div className="flex items-center justify-between px-6 py-3 bg-white border-b border-slate-200 shadow-sm flex-shrink-0">
         <div>
           <h1 className="text-base font-semibold text-slate-800 leading-none">PharmSense AI Assistant</h1>
-          <p className="text-xs text-slate-400 mt-0.5">Search medications by name</p>
+          <p className="text-xs text-slate-400 mt-0.5">Search medications by name or symptoms</p>
         </div>
       </div>
 
@@ -133,7 +154,7 @@ export default function ChatPage() {
       <div className="flex-1 overflow-y-auto px-4 md:px-8 py-6">
         <div className="max-w-3xl mx-auto">
           {messages.map((msg) => (
-            <MessageBubble key={msg.id} message={msg} />
+            <MessageBubble key={msg.id} message={msg} onViewDetails={setModalProductId} />
           ))}
           {isLoading && <TypingIndicator />}
           {error && (
@@ -154,7 +175,7 @@ export default function ChatPage() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             rows={1}
-            placeholder="Type a medication name…"
+            placeholder="Type a medication name or describe your symptoms…"
             disabled={isLoading}
             className="flex-1 resize-none rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed max-h-36 overflow-y-auto leading-relaxed"
             style={{ height: "46px" }}
